@@ -9,8 +9,8 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.title = "Wastelands";
-		config.height = 640;
-		config.width = 1080;
+		config.height = 720;
+		config.width = 1280;
 		new LwjglApplication(new Wastelanders(), config);
 		
 	}

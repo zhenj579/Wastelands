@@ -75,6 +75,8 @@ public class Player extends BaseActor{
 		
 		alignCamera();
 		
+		boundToWorld();
+		
 		dp = new Vector2(getX() - oldPosition.x, getY() - oldPosition.y);
 		dp.nor();
 	}

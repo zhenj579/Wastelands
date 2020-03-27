@@ -10,14 +10,14 @@ public class Wastelands extends ApplicationAdapter {
 	
 	@Override
 	public void create () {
-		map = new Map();	
+		//map = new Map();	
 	}
 
 	@Override
 	public void render () {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		map.render();
+		//map.render();
 
 	}
 	

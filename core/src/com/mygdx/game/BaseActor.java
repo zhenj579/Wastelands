@@ -574,10 +574,10 @@ public class BaseActor extends Group
         // center camera on actor
         cam.position.set( this.getX() + this.getOriginX(), this.getY() + this.getOriginY(), 0);
         
-        ((OrthographicCamera)cam).zoom = 0.5f;
+        //((OrthographicCamera)cam).zoom = 0.5f;
         // bound camera to layout
         //cam.position.x = MathUtils.clamp(cam.position.x, cam.viewportWidth/2,  worldBounds.width -  cam.viewportWidth/2);
-        //cam.position.y = MathUtils.clamp(cam.position.y, cam.viewportHeight/2, worldBounds.height - cam.viewportHeight/2);
+       // cam.position.y = MathUtils.clamp(cam.position.y, cam.viewportHeight/2, worldBounds.height - cam.viewportHeight/2);
         
         cam.update();
     }
