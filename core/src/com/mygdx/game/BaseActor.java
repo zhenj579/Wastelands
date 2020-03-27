@@ -1,4 +1,4 @@
-package com.zhen.game;
+package com.mygdx.game;
 
 import java.util.ArrayList;
 
