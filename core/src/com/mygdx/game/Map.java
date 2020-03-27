@@ -15,10 +15,12 @@ public class Map extends Actor {
 	public static final float V_WIDTH = 67;
 	public static final float V_HEIGHT = 40;
 	public static final float PPM = 16;
+	public static float zoom = 0.5f;
 	
 	private TiledMap map;
 	private OrthogonalTiledMapRenderer renderer;
 	private OrthographicCamera cam;
+	
 	
 	public Map(Stage stage)
 	{
@@ -50,8 +52,8 @@ public class Map extends Actor {
 		Camera mainCamera = getStage().getCamera();
 		cam.position.x = mainCamera.position.x;
 		cam.position.y = mainCamera.position.y;
-		((OrthographicCamera)mainCamera).zoom = 0.5f;
-		cam.zoom = 0.5f;
+		((OrthographicCamera)mainCamera).zoom = zoom;
+		cam.zoom = zoom;
 		cam.update();
 		renderer.setView(cam);
 		

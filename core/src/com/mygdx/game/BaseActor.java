@@ -42,9 +42,7 @@ public class BaseActor extends Group
     private float acceleration;
     private float maxSpeed;
     private float deceleration;
-    
-    protected Stage stageReference;
-    
+        
     private Polygon boundaryPolygon;
 
     // stores size of game world for all actors
@@ -57,7 +55,6 @@ public class BaseActor extends Group
 
         // perform additional initialization tasks
         setPosition(x,y);
-        stageReference = s;
         s.addActor(this);
         
         // initialize animation data
@@ -74,8 +71,6 @@ public class BaseActor extends Group
 
         boundaryPolygon = null;
         
-//        OrthographicCamera cam = new OrthographicCamera();
-//        stageReference.getViewport().setCamera(cam);
     }
     
     /** 
@@ -574,10 +569,11 @@ public class BaseActor extends Group
         // center camera on actor
         cam.position.set( this.getX() + this.getOriginX(), this.getY() + this.getOriginY(), 0);
         
-        //((OrthographicCamera)cam).zoom = 0.5f;
         // bound camera to layout
-        //cam.position.x = MathUtils.clamp(cam.position.x, cam.viewportWidth/2,  worldBounds.width -  cam.viewportWidth/2);
-       // cam.position.y = MathUtils.clamp(cam.position.y, cam.viewportHeight/2, worldBounds.height - cam.viewportHeight/2);
+        float test1 = worldBounds.width;
+        float test2 = worldBounds.height;
+        cam.position.x = MathUtils.clamp(cam.position.x, cam.viewportWidth/2 * Map.zoom,  worldBounds.width - cam.viewportWidth/2 * Map.zoom);
+        cam.position.y = MathUtils.clamp(cam.position.y, cam.viewportHeight/2 * Map.zoom, worldBounds.height - cam.viewportHeight/2 * Map.zoom);
         
         cam.update();
     }

@@ -8,7 +8,7 @@ public class LevelScreen extends BaseScreen
     public void initialize() 
     {   
     	map = new Map(mainStage);
-    	wastelander = new Player(100, 100, mainStage);
+    	wastelander = new Player(600, 400, mainStage);
     }
 
     public void update(float dt)
