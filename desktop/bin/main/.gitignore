@@ -1,10 +1,4 @@
-/OpenSans.ttf
 /com/
-/button.png
-/unknown.png
-/player.png
-/down.png
-/right.png
-/up.png
-/downv2.png
-/upv2.png
+/tilemap_wasteland.png
+/tilemap_wasteland.tsx
+/wasteland_test_map.tmx
