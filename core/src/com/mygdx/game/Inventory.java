@@ -1,16 +1,19 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 public class Inventory {
 	
 	private int nRows;
 	private int nCols;
-	Table uiTable;
-	InventoryItemSlot [][] bts;
+	private Table uiTable;
+	private InventoryItemSlot [][] bts;
 	
-	Table inventory = new Table();
+	private Table inventory = new Table();
+ 
+	private InventoryItemSlot curSelected;
+	private InventoryItemSlot lastHoverOver;
+	private boolean dragging = false;
 	
 	public Inventory(int nRows, int nCols, Table uiTable) {
 		this.nRows = nRows;
@@ -26,7 +29,8 @@ public class Inventory {
 		for(int r = 0; r < nRows; r++) {
 			for(int c = 0; c < nCols; c++) {
 				bts[r][c] = new InventoryItemSlot(BaseGame.textButtonStyle);
-				bts[r][c].addListener(new InventoryButtonListener(bts[r][c]));
+				bts[r][c].addListener(new InventoryButtonListener(bts[r][c], this));
+				bts[r][c].addListener(new InventoryDragListener(bts[r][c], this));
 				inventory.add(bts[r][c]);
 			}
 			inventory.row();
@@ -52,4 +56,39 @@ public class Inventory {
 			
 	}
 	
+	public void moveItem(InventoryItemSlot source, InventoryItemSlot destination) {
+		if(source == null || destination == null) {
+			return;
+		}
+		destination.setItem(source.getItem(), source.getQuanity());
+		source.clearSlot();
+	}
+	
+	public void setCurSel(InventoryItemSlot bt) {
+		curSelected = bt;
+	}
+	
+	public void setLastHoveredOver(InventoryItemSlot bt) {
+		lastHoverOver = bt;
+	}
+	
+	public InventoryItemSlot getLastHoveredOver() {
+		return lastHoverOver;
+	}
+	
+	public InventoryItemSlot getCurSel() {
+		return curSelected;
+	}
+	
+	public Table getInvTable() {
+		return inventory;
+	}
+	
+	public boolean isDragging() {
+		return dragging;
+	}
+	
+	public void setDragging(boolean drag) {
+		dragging = drag;
+	}
 }

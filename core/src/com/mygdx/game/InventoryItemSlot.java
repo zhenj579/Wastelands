@@ -2,7 +2,6 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 public class InventoryItemSlot extends Button{
@@ -43,6 +42,11 @@ public class InventoryItemSlot extends Button{
 		super.validate();
 	}
 	
+	public void clearSlot() {
+		item = null;
+		quantity = 0;
+	}
+	
 	public boolean isEmpty() {
 		if(item == null) {
 			return true;
@@ -69,7 +73,11 @@ public class InventoryItemSlot extends Button{
 		quantity++;
 	}
 	
-	public InventoryItem GetItem() {
+	public void decrementQuantity() {
+		quantity--;
+	}
+	
+	public InventoryItem getItem() {
 		return item;
 	}
 	
