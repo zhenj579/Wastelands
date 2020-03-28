@@ -440,7 +440,7 @@ public class BaseActor extends Group
         boundaryPolygon.setPosition( getX(), getY() );
         boundaryPolygon.setOrigin( getOriginX(), getOriginY() );
         boundaryPolygon.setRotation( getRotation() );
-        boundaryPolygon.setScale( getScaleX(), getScaleY() );        
+        boundaryPolygon.setScale( getScaleX(), getScaleY() );     
         return boundaryPolygon;
     }
 

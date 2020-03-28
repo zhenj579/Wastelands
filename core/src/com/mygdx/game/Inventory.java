@@ -1,9 +1,6 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 public class Inventory {
@@ -11,7 +8,7 @@ public class Inventory {
 	private int nRows;
 	private int nCols;
 	Table uiTable;
-	Button [][] bts;
+	InventoryItemSlot [][] bts;
 	
 	Table inventory = new Table();
 	
@@ -19,7 +16,7 @@ public class Inventory {
 		this.nRows = nRows;
 		this.nCols = nCols;
 		this.uiTable = uiTable;
-		bts = new Button[nRows][nCols];
+		bts = new InventoryItemSlot[nRows][nCols];
 		initBts();
 		uiTable.add(inventory);
 		inventory.setVisible(false);
@@ -28,8 +25,7 @@ public class Inventory {
 	private void initBts() {
 		for(int r = 0; r < nRows; r++) {
 			for(int c = 0; c < nCols; c++) {
-				bts[r][c] = new Button(BaseGame.textButtonStyle);
-				bts[r][c].setColor(Color.CYAN);
+				bts[r][c] = new InventoryItemSlot(BaseGame.textButtonStyle);
 				bts[r][c].addListener(new InventoryButtonListener(bts[r][c]));
 				inventory.add(bts[r][c]);
 			}
@@ -44,4 +40,16 @@ public class Inventory {
 	public void setVisible(boolean visibility) {
 		inventory.setVisible(visibility);
 	}
+	
+	public void addItem(InventoryItem item, int quantity) {
+		for(int r = 0; r < nRows; r++) {
+			for(int c = 0; c < nCols; c++) {
+				if(bts[r][c].isEmpty()) {
+					bts[r][c].setItem(item);
+				}
+			}
+		}
+			
+	}
+	
 }
