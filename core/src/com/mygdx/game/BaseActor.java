@@ -570,8 +570,6 @@ public class BaseActor extends Group
         cam.position.set( this.getX() + this.getOriginX(), this.getY() + this.getOriginY(), 0);
         
         // bound camera to layout
-        float test1 = worldBounds.width;
-        float test2 = worldBounds.height;
         cam.position.x = MathUtils.clamp(cam.position.x, cam.viewportWidth/2 * Map.zoom,  worldBounds.width - cam.viewportWidth/2 * Map.zoom);
         cam.position.y = MathUtils.clamp(cam.position.y, cam.viewportHeight/2 * Map.zoom, worldBounds.height - cam.viewportHeight/2 * Map.zoom);
         

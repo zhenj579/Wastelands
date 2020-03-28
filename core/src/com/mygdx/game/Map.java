@@ -8,6 +8,8 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class Map extends Actor {
@@ -15,7 +17,7 @@ public class Map extends Actor {
 	public static final float V_WIDTH = 67;
 	public static final float V_HEIGHT = 40;
 	public static final float PPM = 16;
-	public static float zoom = 0.5f;
+	public static float zoom = 0.4f;
 	
 	private TiledMap map;
 	private OrthogonalTiledMapRenderer renderer;

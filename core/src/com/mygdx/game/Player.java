@@ -1,23 +1,32 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
 
 public class Player extends BaseActor{
 	
-	private Vector2 dp = new Vector2(0.0f, 0.0f);
 	private Animation<TextureRegion> up, down, left, right;
 	private Animation<TextureRegion> sup, sdown, sleft, sright;
 	private Animation<TextureRegion> cur = down;
 	final float frameDuration = 0.25f;
+	float uidt = 0.0f;
+	private Table uiTable;
+	private Inventory inv;
 	
-	public Player(float x, float y, Stage s) {
+	public Player(float x, float y, Stage s, Table uiTable) {
 		super(x, y, s);
 		
 		initAnim();
@@ -25,13 +34,15 @@ public class Player extends BaseActor{
         setAcceleration(45 * 4);
         setMaxSpeed(50);
         setDeceleration(45 * 4);
-   
+        
+        this.uiTable = uiTable;
+        
+        inv = new Inventory(3,3, uiTable);
 	}
 	
 	public void act(float dt) {
 		
 		super.act(dt);
-		Vector2 oldPosition = new Vector2(getX(), getY());
 		
         if (Gdx.input.isKeyPressed(Keys.LEFT)) {
         	cur = left;
@@ -49,7 +60,9 @@ public class Player extends BaseActor{
         	cur = down;
             accelerateAtAngle(270);
         }
-		
+        
+        toggleUI(dt);
+        
         if(getSpeed() == 0) {
         	if(cur == right) {
         		cur = sright;
@@ -66,9 +79,7 @@ public class Player extends BaseActor{
         }
         
         setAnimation(cur);
-        
-        System.out.println("Player X: " + getX() + " Player Y: " + getY());
-        
+                
         setAnimationPaused( !isMoving() );
         
 		applyPhysics(dt);
@@ -77,8 +88,21 @@ public class Player extends BaseActor{
 		
 		boundToWorld();
 		
-		dp = new Vector2(getX() - oldPosition.x, getY() - oldPosition.y);
-		dp.nor();
+	}
+	
+	public void toggleUI(float dt) {
+		if(uidt == 0.0f) {
+			if(Gdx.input.isKeyJustPressed(Keys.CONTROL_LEFT)) {
+				uidt += dt;
+				if(!inv.isVisible()) {
+        			inv.setVisible(true);
+        		} else {     
+        			inv.setVisible(false);        
+        		}
+        	}
+		} else {
+			uidt = 0.0f;
+		}
 	}
 	
 	public void initAnim() {
