@@ -456,7 +456,7 @@ public class BaseActor extends Group
         Polygon poly1 = this.getBoundaryPolygon();
         Polygon poly2 = other.getBoundaryPolygon();
 
-        // initial test to improve performance
+//         initial test to improve performance
         if ( !poly1.getBoundingRectangle().overlaps(poly2.getBoundingRectangle()) )
             return false;
 

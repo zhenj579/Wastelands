@@ -32,7 +32,6 @@ public class Player extends BaseActor{
 		
 		super.act(dt);
 		Vector2 oldPosition = new Vector2(getX(), getY());
-		
         if (Gdx.input.isKeyPressed(Keys.LEFT)) {
         	cur = left;
             accelerateAtAngle(180);
@@ -67,7 +66,7 @@ public class Player extends BaseActor{
         
         setAnimation(cur);
         
-        System.out.println("Player X: " + getX() + " Player Y: " + getY());
+//        System.out.println("Player X: " + getX() + " Player Y: " + getY());
         
         setAnimationPaused( !isMoving() );
         
