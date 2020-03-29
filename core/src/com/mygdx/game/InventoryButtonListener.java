@@ -29,6 +29,7 @@ public class InventoryButtonListener extends ClickListener{
 		}
 	}
 	
+	@Override
 	public void exit(InputEvent event, float x, float y, int pointer, Actor fromActor) {
 		if(ref.isDragging()) {
 			ref.setLastHoveredOver(null);
