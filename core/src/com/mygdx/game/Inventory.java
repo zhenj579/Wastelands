@@ -31,7 +31,7 @@ public class Inventory extends Actor{
 	}
 	
 	public void draw(Batch batch, float parentAlpha) {
-		if(dragging && curSelected != null) {
+		if(dragging && curSelected != null && !curSelected.isEmpty()) {
 			curSelected.hideItem();
 			Vector2 screenpos = BaseScreen.uiStage.screenToStageCoordinates(new Vector2(Gdx.input.getX(), Gdx.input.getY()));
 			batch.draw(curSelected.getItem().getTextureRegion(), screenpos.x - 22, screenpos.y - 4);
@@ -72,7 +72,7 @@ public class Inventory extends Actor{
 	}
 	
 	public void moveItem(InventoryItemSlot source, InventoryItemSlot destination) {
-		if(source == null || destination == null) {
+		if(source == null || destination == null || (source == destination)) {
 			return;
 		}
 		destination.setItem(source.getItem(), source.getQuanity());
