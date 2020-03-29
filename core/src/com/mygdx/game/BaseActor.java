@@ -456,7 +456,7 @@ public class BaseActor extends Group
         Polygon poly1 = this.getBoundaryPolygon();
         Polygon poly2 = other.getBoundaryPolygon();
 
-        // initial test to improve performance
+//         initial test to improve performance
         if ( !poly1.getBoundingRectangle().overlaps(poly2.getBoundingRectangle()) )
             return false;
 
@@ -481,7 +481,7 @@ public class BaseActor extends Group
 
         MinimumTranslationVector mtv = new MinimumTranslationVector();
         boolean polygonOverlap = Intersector.overlapConvexPolygons(poly1, poly2, mtv);
-
+        
         if ( !polygonOverlap )
             return null;
 

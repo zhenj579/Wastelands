@@ -31,6 +31,8 @@ public class Player extends BaseActor{
 		
 		initAnim();
 		
+		setBoundaryPolygon(8);
+		
         setAcceleration(45 * 4);
         setMaxSpeed(50);
         setDeceleration(45 * 4);
@@ -79,7 +81,6 @@ public class Player extends BaseActor{
         }
         
         setAnimation(cur);
-                
         setAnimationPaused( !isMoving() );
         
 		applyPhysics(dt);
@@ -87,6 +88,7 @@ public class Player extends BaseActor{
 		alignCamera();
 		
 		boundToWorld();
+
 		
 	}
 	
