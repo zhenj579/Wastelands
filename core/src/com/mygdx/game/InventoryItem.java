@@ -15,7 +15,7 @@ public abstract class InventoryItem {
 		itemTextureRegion = new TextureRegion(itemTexture);
 	}
 	
-	public TextureRegion GetTextureRegion() {
+	public TextureRegion getTextureRegion() {
 		return itemTextureRegion;
 	}
 }

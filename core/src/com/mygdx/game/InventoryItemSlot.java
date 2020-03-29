@@ -9,6 +9,7 @@ public class InventoryItemSlot extends Button{
 	private InventoryItem item;
 	private int quantity = 0;
 	Label quantityLabel;
+	boolean hidden = false;
 	
 	public InventoryItemSlot(ButtonStyle bs) {
 		super(bs);
@@ -31,7 +32,7 @@ public class InventoryItemSlot extends Button{
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
 		super.draw(batch, parentAlpha);
-		if(item != null) {
+		if(item != null && !hidden) {
 			batch.draw(item.itemTextureRegion, getX() + getWidth()/2 - 16, getY() + getHeight()/2 - 16);
 			if(quantity > 0) {
 				quantityLabel.setX(getX() + getWidth()/2 + 8);
@@ -83,5 +84,13 @@ public class InventoryItemSlot extends Button{
 	
 	public int getQuanity() {
 		return quantity;
+	}
+	
+	public void hideItem() {
+		hidden = true;
+	}
+	
+	public void showItem() {
+		hidden = false;
 	}
 }

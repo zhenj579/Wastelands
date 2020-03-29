@@ -1,8 +1,12 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
-public class Inventory {
+public class Inventory extends Actor{
 	
 	private int nRows;
 	private int nCols;
@@ -19,10 +23,21 @@ public class Inventory {
 		this.nRows = nRows;
 		this.nCols = nCols;
 		this.uiTable = uiTable;
+		BaseScreen.uiStage.addActor(this);
 		bts = new InventoryItemSlot[nRows][nCols];
 		initBts();
 		uiTable.add(inventory);
 		inventory.setVisible(false);
+	}
+	
+	public void draw(Batch batch, float parentAlpha) {
+		if(dragging && curSelected != null) {
+			curSelected.hideItem();
+			Vector2 screenpos = BaseScreen.uiStage.screenToStageCoordinates(new Vector2(Gdx.input.getX(), Gdx.input.getY()));
+			batch.draw(curSelected.getItem().getTextureRegion(), screenpos.x - 22, screenpos.y - 4);
+		} else if(curSelected != null){
+			curSelected.showItem();
+		}
 	}
 	
 	private void initBts() {
