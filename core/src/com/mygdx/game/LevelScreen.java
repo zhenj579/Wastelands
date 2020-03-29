@@ -43,6 +43,9 @@ public class LevelScreen extends BaseScreen
     
     public void update(float dt)
     {
+    	if(!wastelander.isWithinDistance(20, merchant) && merchant.getShop().isVisible()) {
+    		merchant.getShop().setVisible(false);
+    	}
     	Vector2 wastelanderCoordinates = new Vector2((int)wastelander.getX(), (int)wastelander.getY());
     	WastelandTrash trash = map.getTrashAt(wastelanderCoordinates, wastelander);
     	if(trash != null)

@@ -10,9 +10,9 @@ import com.badlogic.gdx.utils.Array;
 public class Npc extends BaseActor {
 	
 	private Animation<TextureRegion> anim;
+	private Shop shop;
 	private static final int animFrames = 2;
 	private static final float animTime = 0.6f;
-	private Shop shop;
 	
 	public Npc(float x, float y, Stage s, Table uiTable) {
 		super(x, y, s);
