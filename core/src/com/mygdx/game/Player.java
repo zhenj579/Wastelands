@@ -37,7 +37,7 @@ public class Player extends BaseActor{
         
         this.uiTable = uiTable;
         
-        inv = new Inventory(3,3, uiTable);
+        inv = new Inventory(4,4, uiTable);
 	}
 	
 	public void act(float dt) {
