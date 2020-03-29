@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Align;
 
 public class Inventory extends Actor{
 	
@@ -26,6 +27,7 @@ public class Inventory extends Actor{
 		this.uiTable = uiTable;
 		BaseScreen.uiStage.addActor(this);
 		bts = new InventoryItemSlot[nRows][nCols];
+		inventory.align(Align.center);
 		initBts();
 		uiTable.add(inventory);
 		inventory.setVisible(false);
@@ -77,6 +79,8 @@ public class Inventory extends Actor{
 			for(int c = 0; c < nCols; c++) {
 				if(bts[r][c].isEmpty()) {
 					bts[r][c].setItem(item);
+				} else if(bts[r][c].getItem().equals(item)) {
+					bts[r][c].incrementQuantity();
 				}
 			}
 		}
