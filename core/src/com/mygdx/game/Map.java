@@ -24,9 +24,9 @@ public class Map extends Actor {
 	private OrthographicCamera cam;
 	
 	
-	public Map(Stage stage)
+	public Map(String path, Stage stage)
 	{
-		map = new TmxMapLoader().load("wasteland_test_map.tmx");
+		map = new TmxMapLoader().load(path);
 		renderer = new OrthogonalTiledMapRenderer(map);
 		cam = new OrthographicCamera();
 		cam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
