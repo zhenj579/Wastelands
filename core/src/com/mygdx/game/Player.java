@@ -21,6 +21,10 @@ public class Player extends BaseActor{
 
 	private Inventory inv;
 	
+	private boolean spdUpgrd = false;
+	private boolean invUpgrd = false;
+	private boolean vacUpgrd = false;
+	
 	public Player(float x, float y, Stage s, Table uiTable) {
 		super(x, y, s);
 		
@@ -29,7 +33,7 @@ public class Player extends BaseActor{
 		setBoundaryPolygon(8);
 		
         setAcceleration(45 * 4);
-        setMaxSpeed(50);
+        setMaxSpeed(25);
         setDeceleration(45 * 4);
         
         inv = new Inventory(4,4, uiTable);

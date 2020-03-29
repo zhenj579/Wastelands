@@ -24,7 +24,6 @@ public class WastelandTrash extends BaseActor{
 		this.ref = ref;
 		stage.addActor(this);	
 		i = index;
-		
 	}
 	
 	public void setSFX(String path)

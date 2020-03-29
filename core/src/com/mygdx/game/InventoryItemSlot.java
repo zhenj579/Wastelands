@@ -6,10 +6,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 public class InventoryItemSlot extends Button{
 	
-	private InventoryItem item;
+	protected InventoryItem item;
 	private int quantity = 1;
-	private Label quantityLabel;
-	private boolean hidden = false;
+	protected Label quantityLabel;
+	protected boolean hidden = false;
+	
+	private static final int labelOffSetX = 8;
+	private static final int labelOffSetY = -30;
+	
+	private boolean isShopSlot = false;
 	
 	public InventoryItemSlot() {
 		super(BaseGame.skin);
@@ -34,9 +39,9 @@ public class InventoryItemSlot extends Button{
 		super.draw(batch, parentAlpha);
 		if(item != null && !hidden) {
 			batch.draw(item.itemTextureRegion, getX() + getWidth()/2 - 16, getY() + getHeight()/2 - 16);
-			if(quantity > 0) {
-				quantityLabel.setX(getX() + getWidth()/2 + 8);
-				quantityLabel.setY(getY() + getHeight()/2 - 30);
+			if(quantity > 0 && !isShopSlot) {
+				quantityLabel.setX(getX() + getWidth()/2 + labelOffSetX);
+				quantityLabel.setY(getY() + getHeight()/2 + labelOffSetY);
 				quantityLabel.draw(batch, parentAlpha);
 			}
 		}
@@ -54,6 +59,14 @@ public class InventoryItemSlot extends Button{
 		} else {
 			return false;
 		}
+	}
+	
+	public void setShopSlot(boolean slot) {
+		isShopSlot = slot;
+	}
+	
+	public boolean isShopSlot() {
+		return isShopSlot;
 	}
 	
 	public void setItem(InventoryItem item) {
