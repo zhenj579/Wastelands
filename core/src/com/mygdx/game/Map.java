@@ -57,11 +57,13 @@ public class Map extends Actor {
 		
 		TiledMapTileLayer layer = (TiledMapTileLayer)map.getLayers().get(0); 
 		
+		int i = 0;
 		for(MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class))
 		{
 			Rectangle rect = ((RectangleMapObject)object).getRectangle();
-			WastelandTrash trash = new WastelandTrash(object.getName(),(int)rect.getX(),(int)rect.getY(),stage);
+			WastelandTrash trash = new WastelandTrash(object.getName(),(int)rect.getX(),(int)rect.getY(),stage, this, i);
 			mapObjects.put(new Vector2((int)rect.getX(),(int)rect.getY()), trash);
+			i++;
 		}
 			
 		
@@ -87,6 +89,11 @@ public class Map extends Actor {
 	 {
 		 super.act( dt );
 	 } 
+	 
+	 public void remove(int x, int y) {
+		TiledMapTileLayer layer =  (TiledMapTileLayer) map.getLayers().get(1);
+		layer.getCell(x, y).setTile(null);
+	 }
 	 
 	public void draw(Batch batch, float parentAlpha)
 	{

@@ -481,7 +481,7 @@ public class BaseActor extends Group
 
         MinimumTranslationVector mtv = new MinimumTranslationVector();
         boolean polygonOverlap = Intersector.overlapConvexPolygons(poly1, poly2, mtv);
-
+        
         if ( !polygonOverlap )
             return null;
 

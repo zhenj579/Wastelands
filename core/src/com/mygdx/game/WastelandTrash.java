@@ -6,15 +6,21 @@ public class WastelandTrash extends BaseActor {
 	
 	private boolean destroyed;
 	private String name;
+	private Map ref;
+	int i = 0;
 	
-	public WastelandTrash(String name, float x, float y, Stage stage)
+	public WastelandTrash(String name, float x, float y, Stage stage, Map ref, int index)
 	{
 		super(x,y,stage);
 		this.name = name;
+		this.setWidth(16);
+		this.setHeight(16);
 		destroyed = false;
+		setBoundaryPolygon(8);
 		super.setBoundaryRectangle();
-		stage.addActor(this);
-		
+		this.ref = ref;
+		stage.addActor(this);	
+		i = index;
 	}
 	
 	public boolean isDestroyed()
@@ -43,6 +49,11 @@ public class WastelandTrash extends BaseActor {
 		return name;
 	}
 	
-	
+	@Override
+	public boolean remove() {
+		super.remove();
+		ref.remove((int)getX() / 16, (int)getY() / 16);
+		return false;
+	}
 
 }

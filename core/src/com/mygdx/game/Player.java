@@ -11,7 +11,6 @@ import com.badlogic.gdx.utils.Array;
 
 public class Player extends BaseActor{
 	
-	private Vector2 dp = new Vector2(0.0f, 0.0f);
 	private Animation<TextureRegion> up, down, left, right;
 	private Animation<TextureRegion> sup, sdown, sleft, sright;
 	private Animation<TextureRegion> cur = down;
@@ -22,6 +21,8 @@ public class Player extends BaseActor{
 		
 		initAnim();
 		
+		setBoundaryPolygon(8);
+		
         setAcceleration(45 * 4);
         setMaxSpeed(50);
         setDeceleration(45 * 4);
@@ -31,7 +32,7 @@ public class Player extends BaseActor{
 	public void act(float dt) {
 		
 		super.act(dt);
-		Vector2 oldPosition = new Vector2(getX(), getY());
+		
         if (Gdx.input.isKeyPressed(Keys.LEFT)) {
         	cur = left;
             accelerateAtAngle(180);
@@ -75,9 +76,6 @@ public class Player extends BaseActor{
 		alignCamera();
 		
 		boundToWorld();
-		
-		dp = new Vector2(getX() - oldPosition.x, getY() - oldPosition.y);
-		dp.nor();
 	}
 	
 	public void initAnim() {

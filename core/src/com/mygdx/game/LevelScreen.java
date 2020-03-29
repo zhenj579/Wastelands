@@ -19,7 +19,10 @@ public class LevelScreen extends BaseScreen
     	WastelandTrash trash = map.getTrashAt(wastelanderCoordinates);
     	if(trash != null)
     	{
-    		System.out.println(trash.getName());
+    		if(wastelander.overlaps(trash)) {
+    			trash.remove();
+    			System.out.println(trash.getName());
+    		}
     	}
     	mainStage.act(dt);
     }
