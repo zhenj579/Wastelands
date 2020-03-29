@@ -1,20 +1,17 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 
 public class Npc extends BaseActor {
 	
 	private Animation<TextureRegion> anim;
 	private static final int animFrames = 2;
-	private static final float animTime = 0.4f;
+	private static final float animTime = 0.6f;
 	private Shop shop;
 	
 	public Npc(float x, float y, Stage s, Table uiTable) {

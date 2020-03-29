@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -617,13 +616,6 @@ public class BaseActor extends Group
     {
         return getList(stage, className).size();
     }
-    
-    public float distance(BaseActor other)
-    {
-        Vector2 thisActor = new Vector2(getX(),getY());
-        Vector2 otherActor = new Vector2(other.getX(),other.getY());
-        return thisActor.dst(otherActor);
-    }
 
     // ----------------------------------------------
     // Actor methods: act and draw
@@ -665,6 +657,13 @@ public class BaseActor extends Group
                 getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation() );
 
         super.draw( batch, parentAlpha );
+    }
+    
+    public float distance(BaseActor other)
+    {
+    	Vector2 thisActor = new Vector2(getX(),getY());
+    	Vector2 otherActor = new Vector2(other.getX(),other.getY());
+    	return thisActor.dst(otherActor);
     }
 
 }

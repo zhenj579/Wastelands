@@ -10,16 +10,15 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class Map extends Actor {
 	
@@ -57,13 +56,27 @@ public class Map extends Actor {
 		
 		BaseActor.setWorldBounds(mapWidth, mapHeight);
 		
-		TiledMapTileLayer layer = (TiledMapTileLayer)map.getLayers().get(0); 
-		
 		int i = 0;
 		for(MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class))
 		{
 			Rectangle rect = ((RectangleMapObject)object).getRectangle();
 			WastelandTrash trash = new WastelandTrash(object.getName(),(int)rect.getX(),(int)rect.getY(),stage, this, i);
+			if(trash.getName().equals("trashedBottle"))
+			{
+				trash.setSFX("bottle_pickup.mp3");
+			}
+			else if(trash.getName().equals("trashedBook"))
+			{
+				trash.setSFX("paper_pickup.mp3");
+			}
+			else if(trash.getName().equals("trashedCan"))
+			{
+				trash.setSFX("can_pickup.mp3");
+			}
+			else
+			{
+				trash.setSFX("wood_pickup.mp3");
+			}
 			mapObjects.put(new Vector2((int)rect.getX(),(int)rect.getY()), trash);
 			i++;
 		}
@@ -72,14 +85,50 @@ public class Map extends Actor {
 		stage.addActor(this);
 	}
 	
-	public WastelandTrash getTrashAt(Vector2 coordinates)
+	public WastelandTrash getTrashAt(final Vector2 coordinates, final Player player)
 	{
-		for(Entry<Vector2, WastelandTrash> t : mapObjects.entrySet())
+		for(final Entry<Vector2, WastelandTrash> t : mapObjects.entrySet())
 		{
-			Vector2 entry = t.getKey();
-			if(coordinates.x >= entry.x - 8 && coordinates.x <= entry.x + 8
-					&& coordinates.y >= entry.y - 8 && coordinates.y <= entry.y + 8)
+			final Vector2 entry = t.getKey();
+			if(t.getValue().isDestroyed())
 			{
+				t.getValue().addListener(new ClickListener() {
+					public void clicked(InputEvent event, float x, float y)
+					{
+						if(t.getValue().isDestroyed() && player.isWithinDistance(24, t.getValue()))
+						{
+							InventoryItem item;
+							if(t.getValue().getName().equals("trashedBottle"))
+							{
+								item = new InventoryItem("bottles.png");
+							}
+							else if(t.getValue().getName().equals("trashedBook"))
+							{
+								item = new InventoryItem("paper.png");
+							}
+							else if(t.getValue().getName().equals("trashedCan"))
+							{
+								item = new InventoryItem("cans.png");
+							}
+							else
+							{
+								item = new InventoryItem("wood.png");
+							}
+							item.setName(getName());
+							player.getInventory().addItem(item);
+							t.getValue().remove();
+							t.getValue().playSFX();
+						}
+					}
+				});
+				mapObjects.remove(entry);
+				return null;
+			}
+			else if(coordinates.x >= entry.x - 16 && coordinates.x <= entry.x + 16
+					&& coordinates.y >= entry.y - 16 && coordinates.y <= entry.y + 16)
+			{
+
+				t.getValue().destroy();
 				return t.getValue();
 			}
 		}
@@ -95,6 +144,14 @@ public class Map extends Actor {
 	 public void remove(int x, int y) {
 		TiledMapTileLayer layer =  (TiledMapTileLayer) map.getLayers().get(1);
 		layer.getCell(x, y).setTile(null);
+	 }
+	 
+	 public void printObjectState()
+	 {
+			for(Entry<Vector2, WastelandTrash> t : mapObjects.entrySet())
+			{
+				System.out.println(t.getKey() + " " + t.getValue());
+			}
 	 }
 	 
 	public void draw(Batch batch, float parentAlpha)

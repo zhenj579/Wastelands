@@ -16,9 +16,10 @@ public class LevelScreen extends BaseScreen
     {   
     	//MAP HAS TO BE LOADED IN FIRST BEFORE ANY OTHER ACTOR
     	map = new Map("wasteland_test_map.tmx", mainStage);
+
     	//Otherwise the actor wont be drawn and its events wont be called	
-    	merchant = new Npc(700, 400, mainStage, uiTable);
-    	wastelander = new Player(600, 400, mainStage, uiTable);
+    	merchant = new Npc(565, 420, mainStage, uiTable);
+    	wastelander = new Player(530, 400, mainStage, uiTable);
     	merchant.addListener(new ClickListener() {
     		@Override
     		public void clicked(InputEvent event, float x, float y) {
@@ -29,12 +30,17 @@ public class LevelScreen extends BaseScreen
     			}
     		}
     	});
-    }
 
+
+    	uiTable.setVisible(true);	
+    	
+
+    }
+    
     public void update(float dt)
     {
     	Vector2 wastelanderCoordinates = new Vector2((int)wastelander.getX(), (int)wastelander.getY());
-    	WastelandTrash trash = map.getTrashAt(wastelanderCoordinates);
+    	WastelandTrash trash = map.getTrashAt(wastelanderCoordinates, wastelander);
     	if(trash != null)
     	{
     		if(wastelander.overlaps(trash)) {
@@ -42,6 +48,8 @@ public class LevelScreen extends BaseScreen
     			//wastelander.getInventory().addItem(item);
     			System.out.println(trash.getName());
     		}
+    		trash.destroy();
+//    		map.printObjectState();
     	}
     	mainStage.act(dt);
     	uiStage.act(dt);

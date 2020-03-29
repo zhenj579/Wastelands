@@ -5,13 +5,11 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.Align;
 
 public class Inventory extends Actor{
 	
 	private int nRows;
 	private int nCols;
-	private Table uiTable;
 	private InventoryItemSlot [][] bts;
 	
 	protected Table inventory = new Table();
@@ -31,18 +29,17 @@ public class Inventory extends Actor{
 	public Inventory(int nRows, int nCols, Table uiTable) {
 		this.nRows = nRows;
 		this.nCols = nCols;
-		this.uiTable = uiTable;
 		BaseScreen.uiStage.addActor(this);
 		bts = new InventoryItemSlot[nRows][nCols];
 		//inventory.align(Align.top|Align.center);
-		initUI();
+		initUI(uiTable);
 		initBts();
 		uiTable.add(inventory);
 		inventory.setVisible(false);
 		
 	}
 	
-	private void initUI() {
+	private void initUI(Table uiTable) {
 		uiTable.row().growY();
 	}
 	
@@ -122,7 +119,10 @@ public class Inventory extends Actor{
 			return;
 		}
 		if(!destination.isEmpty()) {
-			//InventoryItemSlot temp = destination.getItemCopy()
+			InventoryItemSlot temp = destination.getItemSlotCopy();
+			destination.setItem(source.getItem(), source.getQuanity());
+			source.setItem(temp.getItem(), temp.getQuanity());
+			return;
 		}
 		destination.setItem(source.getItem(), source.getQuanity());
 		source.clearSlot();
