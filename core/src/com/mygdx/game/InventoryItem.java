@@ -1,22 +1,29 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 
-public abstract class InventoryItem {
+public class InventoryItem {
 	
 	protected Texture itemTexture;
 	protected TextureRegion itemTextureRegion;
 	protected String path;
 	protected String itemName;
 	
-	public InventoryItem(String texturePath, String itemName) {
+	public InventoryItem(String texturePath) {
 		itemTexture = new Texture(texturePath);
 		itemTextureRegion = new TextureRegion(itemTexture);
 		this.path = texturePath;
-		this.itemName = itemName;
+	}
+	
+	public void setName(String name)
+	{
+		this.itemName = name;
+	}
+	
+	public String getName()
+	{
+		return itemName;
 	}
 	
 	public TextureRegion getTextureRegion() {
@@ -28,7 +35,6 @@ public abstract class InventoryItem {
 		if(!(other instanceof InventoryItem)){
 			return false;
 		}
-		return path.equals(((InventoryItem)other).path)
-				&& itemName.equals(((InventoryItem)other).itemName);
+		return path.equals(((InventoryItem)other).path);
 	}
 }

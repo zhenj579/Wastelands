@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 public class InventoryItemSlot extends Button{
 	
 	private InventoryItem item;
-	private int quantity = 0;
+	private int quantity = 1;
 	private Label quantityLabel;
 	private boolean hidden = false;
 	
@@ -58,7 +58,11 @@ public class InventoryItemSlot extends Button{
 	
 	public void setItem(InventoryItem item) {
 		this.item = item;
-		quantity++;
+		if(quantity > 1)
+		{
+			quantity++;
+		}
+		
 	}
 	
 	public void setItem(InventoryItem item, int q) {

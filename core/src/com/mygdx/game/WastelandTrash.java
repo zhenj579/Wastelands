@@ -1,13 +1,16 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
-public class WastelandTrash extends BaseActor {
+public class WastelandTrash extends BaseActor{
 	
 	private boolean destroyed;
 	private String name;
 	private Map ref;
 	int i = 0;
+	private Sound sfx;
 	
 	public WastelandTrash(String name, float x, float y, Stage stage, Map ref, int index)
 	{
@@ -21,6 +24,17 @@ public class WastelandTrash extends BaseActor {
 		this.ref = ref;
 		stage.addActor(this);	
 		i = index;
+		
+	}
+	
+	public void setSFX(String path)
+	{
+		sfx = Gdx.audio.newSound(Gdx.files.internal(path));
+	}
+	
+	public void playSFX()
+	{
+		sfx.play(1.0f);
 	}
 	
 	public boolean isDestroyed()

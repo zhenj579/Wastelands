@@ -18,7 +18,7 @@ public class InventoryButtonListener extends ClickListener{
 	@Override
 	public void clicked(InputEvent event, float x, float y) {
 		if(bt.isEmpty() && !added) {
-			bt.setItem(new InventoryWaterBottle(), 3);
+//			bt.setItem(new InventoryWaterBottle(), 3);
 		} 
 	}
 	

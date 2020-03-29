@@ -1,18 +1,11 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
 
@@ -46,19 +39,19 @@ public class Player extends BaseActor{
 		
 		super.act(dt);
 		
-        if (Gdx.input.isKeyPressed(Keys.LEFT)) {
+        if (Gdx.input.isKeyPressed(Keys.A)) {
         	cur = left;
             accelerateAtAngle(180);
         }
-        if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
+        if (Gdx.input.isKeyPressed(Keys.D)) {
         	cur = right;
             accelerateAtAngle(0);
         }
-        if (Gdx.input.isKeyPressed(Keys.UP)) {
+        if (Gdx.input.isKeyPressed(Keys.W)) {
         	cur = up;
             accelerateAtAngle(90);
         }
-        if (Gdx.input.isKeyPressed(Keys.DOWN)) {
+        if (Gdx.input.isKeyPressed(Keys.S)) {
         	cur = down;
             accelerateAtAngle(270);
         }
@@ -94,7 +87,7 @@ public class Player extends BaseActor{
 	
 	public void toggleUI(float dt) {
 		if(uidt == 0.0f) {
-			if(Gdx.input.isKeyJustPressed(Keys.CONTROL_LEFT)) {
+			if(Gdx.input.isKeyJustPressed(Keys.E)) {
 				uidt += dt;
 				if(!inv.isVisible()) {
         			inv.setVisible(true);
