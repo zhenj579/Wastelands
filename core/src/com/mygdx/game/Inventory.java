@@ -74,17 +74,34 @@ public class Inventory extends Actor{
 		inventory.setVisible(visibility);
 	}
 	
-	public void addItem(InventoryItem item, int quantity) {
+	public void addItem(InventoryItem item, int amount) {
 		for(int r = 0; r < nRows; r++) {
 			for(int c = 0; c < nCols; c++) {
 				if(bts[r][c].isEmpty()) {
 					bts[r][c].setItem(item);
+					bts[r][c].increaseQuantityBy(amount);
+					return;
 				} else if(bts[r][c].getItem().equals(item)) {
 					bts[r][c].incrementQuantity();
+					return;
 				}
 			}
 		}
 			
+	}
+	
+	public void addItem(InventoryItem item) {
+		for(int r = 0; r < nRows; r++) {
+			for(int c = 0; c < nCols; c++) {
+				if(bts[r][c].isEmpty()) {
+					bts[r][c].setItem(item);
+					return;
+				} else if(bts[r][c].getItem().equals(item)) {
+					bts[r][c].incrementQuantity();
+					return;
+				}
+			}
+		}
 	}
 	
 	public void moveItem(InventoryItemSlot source, InventoryItemSlot destination) {

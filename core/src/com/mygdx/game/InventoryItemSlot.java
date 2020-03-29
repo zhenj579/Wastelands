@@ -93,4 +93,8 @@ public class InventoryItemSlot extends Button{
 	public void showItem() {
 		hidden = false;
 	}
+	
+	public void increaseQuantityBy(int amount) {
+		quantity += amount;
+	}
 }
