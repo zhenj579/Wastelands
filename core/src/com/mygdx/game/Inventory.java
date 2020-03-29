@@ -17,6 +17,7 @@ public class Inventory extends Actor{
  
 	private InventoryItemSlot curSelected;
 	private InventoryItemSlot lastHoverOver;
+	
 	private boolean dragging = false;
 	
 	public Inventory(int nRows, int nCols, Table uiTable) {
@@ -30,6 +31,17 @@ public class Inventory extends Actor{
 		inventory.setVisible(false);
 	}
 	
+	@Override
+	public void act(float dt) {
+		super.act(dt);
+		if(dragging && !inventory.isVisible()) {
+			dragging = false;
+			curSelected.showItem();
+			curSelected = null;
+		}
+	}
+	
+	@Override
 	public void draw(Batch batch, float parentAlpha) {
 		if(dragging && curSelected != null && !curSelected.isEmpty()) {
 			curSelected.hideItem();

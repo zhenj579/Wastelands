@@ -8,8 +8,8 @@ public class InventoryItemSlot extends Button{
 	
 	private InventoryItem item;
 	private int quantity = 0;
-	Label quantityLabel;
-	boolean hidden = false;
+	private Label quantityLabel;
+	private boolean hidden = false;
 	
 	public InventoryItemSlot(ButtonStyle bs) {
 		super(bs);
