@@ -7,6 +7,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Align;
 
 public abstract class BaseScreen implements Screen, InputProcessor
 {
@@ -20,6 +21,7 @@ public abstract class BaseScreen implements Screen, InputProcessor
         uiStage = new Stage();
 
         uiTable = new Table();
+        uiTable.align(Align.center);
         uiTable.setFillParent(true);
         uiStage.addActor(uiTable);
 
