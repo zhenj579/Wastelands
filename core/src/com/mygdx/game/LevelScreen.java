@@ -1,6 +1,8 @@
 package com.mygdx.game;
 
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -11,6 +13,7 @@ public class LevelScreen extends BaseScreen
     private Map map;
     private Npc merchant;
 	private Player wastelander;	
+	private Sound backgroundMusic;
 	
     public void initialize() 
     {   
@@ -34,7 +37,8 @@ public class LevelScreen extends BaseScreen
 
     	uiTable.setVisible(true);	
     	
-
+    	backgroundMusic = Gdx.audio.newSound(Gdx.files.internal("backgroundmusic.mp3"));
+    	backgroundMusic.loop(0.1f);
     }
     
     public void update(float dt)
