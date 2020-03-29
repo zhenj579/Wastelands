@@ -105,6 +105,10 @@ public class Player extends BaseActor{
 		}
 	}
 	
+	public Inventory getInventory() {
+		return inv;
+	}
+	
 	public void initAnim() {
 		Texture east = new Texture("right.png");
 		Texture west = new Texture("right.png");
