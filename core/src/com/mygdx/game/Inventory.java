@@ -11,7 +11,6 @@ public class Inventory extends Actor{
 	
 	private int nRows;
 	private int nCols;
-	private Table uiTable;
 	private InventoryItemSlot [][] bts;
 	
 	private Table inventory = new Table();
@@ -24,7 +23,6 @@ public class Inventory extends Actor{
 	public Inventory(int nRows, int nCols, Table uiTable) {
 		this.nRows = nRows;
 		this.nCols = nCols;
-		this.uiTable = uiTable;
 		BaseScreen.uiStage.addActor(this);
 		bts = new InventoryItemSlot[nRows][nCols];
 		inventory.align(Align.center);

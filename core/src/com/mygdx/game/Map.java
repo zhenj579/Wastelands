@@ -85,17 +85,17 @@ public class Map extends Actor {
 		stage.addActor(this);
 	}
 	
-	public WastelandTrash getTrashAt(Vector2 coordinates, final Inventory inv)
+	public WastelandTrash getTrashAt(final Vector2 coordinates, final Player player)
 	{
 		for(final Entry<Vector2, WastelandTrash> t : mapObjects.entrySet())
 		{
-			Vector2 entry = t.getKey();
+			final Vector2 entry = t.getKey();
 			if(t.getValue().isDestroyed())
 			{
 				t.getValue().addListener(new ClickListener() {
 					public void clicked(InputEvent event, float x, float y)
 					{
-						if(t.getValue().isDestroyed())
+						if(t.getValue().isDestroyed() && player.isWithinDistance(24, t.getValue()))
 						{
 							InventoryItem item;
 							if(t.getValue().getName().equals("trashedBottle"))
@@ -115,7 +115,7 @@ public class Map extends Actor {
 								item = new InventoryItem("wood.png");
 							}
 							item.setName(getName());
-							inv.addItem(item);
+							player.getInventory().addItem(item);
 							t.getValue().remove();
 							t.getValue().playSFX();
 						}
@@ -124,8 +124,8 @@ public class Map extends Actor {
 				mapObjects.remove(entry);
 				return null;
 			}
-			else if(coordinates.x >= entry.x - 8 && coordinates.x <= entry.x + 8
-					&& coordinates.y >= entry.y - 8 && coordinates.y <= entry.y + 8)
+			else if(coordinates.x >= entry.x - 16 && coordinates.x <= entry.x + 16
+					&& coordinates.y >= entry.y - 16 && coordinates.y <= entry.y + 16)
 			{
 
 				t.getValue().destroy();

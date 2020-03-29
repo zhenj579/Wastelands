@@ -1,13 +1,6 @@
 package com.mygdx.game;
 
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.math.Vector2;
 
 
@@ -39,7 +32,7 @@ public class LevelScreen extends BaseScreen
     public void update(float dt)
     {
     	Vector2 wastelanderCoordinates = new Vector2((int)wastelander.getX(), (int)wastelander.getY());
-    	WastelandTrash trash = map.getTrashAt(wastelanderCoordinates, wastelander.getInventory());
+    	WastelandTrash trash = map.getTrashAt(wastelanderCoordinates, wastelander);
     	if(trash != null)
     	{
     		trash.destroy();

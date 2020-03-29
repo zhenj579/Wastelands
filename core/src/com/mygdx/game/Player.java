@@ -16,7 +16,6 @@ public class Player extends BaseActor{
 	private Animation<TextureRegion> cur = down;
 	final float frameDuration = 0.25f;
 	float uidt = 0.0f;
-	private Table uiTable;
 	private Inventory inv;
 	
 	public Player(float x, float y, Stage s, Table uiTable) {
@@ -29,8 +28,6 @@ public class Player extends BaseActor{
         setAcceleration(45 * 4);
         setMaxSpeed(50);
         setDeceleration(45 * 4);
-        
-        this.uiTable = uiTable;
         
         inv = new Inventory(4,4, uiTable);
 	}
