@@ -21,8 +21,8 @@ public class Player extends BaseActor{
 	private Animation<TextureRegion> up, down, left, right;
 	private Animation<TextureRegion> sup, sdown, sleft, sright;
 	private Animation<TextureRegion> cur = down;
-	final float frameDuration = 0.25f;
-	float uidt = 0.0f;
+	private final float frameDuration = 0.25f;
+	private float uidt = 0.0f;
 	private Table uiTable;
 	private Inventory inv;
 	
@@ -81,6 +81,7 @@ public class Player extends BaseActor{
         }
         
         setAnimation(cur);
+        
         setAnimationPaused( !isMoving() );
         
 		applyPhysics(dt);

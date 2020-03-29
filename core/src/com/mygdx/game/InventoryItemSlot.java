@@ -11,8 +11,8 @@ public class InventoryItemSlot extends Button{
 	private Label quantityLabel;
 	private boolean hidden = false;
 	
-	public InventoryItemSlot(ButtonStyle bs) {
-		super(bs);
+	public InventoryItemSlot() {
+		super(BaseGame.skin);
 		quantityLabel = new Label(quantity + "", BaseGame.labelStyle);
 		quantityLabel.setFontScale(0.5f);
 		quantityLabel.setVisible(false);

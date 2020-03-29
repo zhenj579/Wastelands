@@ -14,12 +14,19 @@ public class Inventory extends Actor{
 	private Table uiTable;
 	private InventoryItemSlot [][] bts;
 	
-	private Table inventory = new Table();
+	protected Table inventory = new Table();
  
 	private InventoryItemSlot curSelected;
 	private InventoryItemSlot lastHoverOver;
 	
 	private boolean dragging = false;
+	
+	private static final int mouseDragXOffSet = 22;
+	private static final int mouseDragYOffSet = 4;
+	private static final int itemMaxSlotWidth = 100;
+	private static final int itemMaxSlotHeight = 100;
+	private static final int itemMinSlotWidth = 60;
+	private static final int itemMinSlotHeight = 60;
 	
 	public Inventory(int nRows, int nCols, Table uiTable) {
 		this.nRows = nRows;
@@ -27,10 +34,16 @@ public class Inventory extends Actor{
 		this.uiTable = uiTable;
 		BaseScreen.uiStage.addActor(this);
 		bts = new InventoryItemSlot[nRows][nCols];
-		inventory.align(Align.center);
+		//inventory.align(Align.top|Align.center);
+		initUI();
 		initBts();
 		uiTable.add(inventory);
 		inventory.setVisible(false);
+		
+	}
+	
+	private void initUI() {
+		uiTable.row().growY();
 	}
 	
 	@Override
@@ -48,7 +61,7 @@ public class Inventory extends Actor{
 		if(dragging && curSelected != null && !curSelected.isEmpty()) {
 			curSelected.hideItem();
 			Vector2 screenpos = BaseScreen.uiStage.screenToStageCoordinates(new Vector2(Gdx.input.getX(), Gdx.input.getY()));
-			batch.draw(curSelected.getItem().getTextureRegion(), screenpos.x - 22, screenpos.y - 4);
+			batch.draw(curSelected.getItem().getTextureRegion(), screenpos.x - mouseDragXOffSet, screenpos.y - mouseDragYOffSet);
 		} else if(curSelected != null){
 			curSelected.showItem();
 		}
@@ -57,10 +70,10 @@ public class Inventory extends Actor{
 	private void initBts() {
 		for(int r = 0; r < nRows; r++) {
 			for(int c = 0; c < nCols; c++) {
-				bts[r][c] = new InventoryItemSlot(BaseGame.textButtonStyle);
+				bts[r][c] = new InventoryItemSlot();
 				bts[r][c].addListener(new InventoryButtonListener(bts[r][c], this));
 				bts[r][c].addListener(new InventoryDragListener(bts[r][c], this));
-				inventory.add(bts[r][c]);
+				inventory.add(bts[r][c]).minWidth(itemMinSlotWidth).minHeight(itemMinSlotHeight).maxWidth(itemMaxSlotWidth).maxHeight(itemMaxSlotHeight);
 			}
 			inventory.row();
 		}
@@ -107,6 +120,9 @@ public class Inventory extends Actor{
 	public void moveItem(InventoryItemSlot source, InventoryItemSlot destination) {
 		if(source == null || destination == null || (source == destination)) {
 			return;
+		}
+		if(!destination.isEmpty()) {
+			//InventoryItemSlot temp = destination.getItemCopy()
 		}
 		destination.setItem(source.getItem(), source.getQuanity());
 		source.clearSlot();

@@ -617,6 +617,13 @@ public class BaseActor extends Group
     {
         return getList(stage, className).size();
     }
+    
+    public float distance(BaseActor other)
+    {
+        Vector2 thisActor = new Vector2(getX(),getY());
+        Vector2 otherActor = new Vector2(other.getX(),other.getY());
+        return thisActor.dst(otherActor);
+    }
 
     // ----------------------------------------------
     // Actor methods: act and draw

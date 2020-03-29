@@ -1,38 +1,34 @@
 package com.mygdx.game;
 
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 
 public class LevelScreen extends BaseScreen
 {
-    Map map;
-	private Player wastelander;
-	
+    private Map map;
+    private Npc merchant;
+	private Player wastelander;	
 	
     public void initialize() 
     {   
+    	//MAP HAS TO BE LOADED IN FIRST BEFORE ANY OTHER ACTOR
     	map = new Map("wasteland_test_map.tmx", mainStage);
-//    	Texture buttonTex = new Texture( Gdx.files.internal("rmcloseup.png") );
-//    	TextureRegion buttonRegion = new TextureRegion(buttonTex);
-//    	ButtonStyle buttonStyle = new ButtonStyle();
-//    	buttonStyle.up = new TextureRegionDrawable( buttonRegion );
-//    	Button test = new Button(buttonStyle);
-//    	uiTable.add(test);
-//    	uiTable.row();
-//    	Label playerName = new Label("John", BaseGame.labelStyle);
-//    	uiTable.add(playerName);
-//    	uiTable.row();
-//    	uiTable.add().padBottom(200);
-    	uiTable.setVisible(true);	
+    	//Otherwise the actor wont be drawn and its events wont be called	
+    	merchant = new Npc(700, 400, mainStage, uiTable);
     	wastelander = new Player(600, 400, mainStage, uiTable);
+    	merchant.addListener(new ClickListener() {
+    		@Override
+    		public void clicked(InputEvent event, float x, float y) {
+    			if(!merchant.getShop().isVisible() && wastelander.isWithinDistance(20, merchant))
+    				merchant.getShop().setVisible(true);
+    			else {
+    				merchant.getShop().setVisible(false);
+    			}
+    		}
+    	});
     }
 
     public void update(float dt)
@@ -43,10 +39,12 @@ public class LevelScreen extends BaseScreen
     	{
     		if(wastelander.overlaps(trash)) {
     			trash.remove();
+    			//wastelander.getInventory().addItem(item);
     			System.out.println(trash.getName());
     		}
     	}
     	mainStage.act(dt);
+    	uiStage.act(dt);
     }
     
 }
