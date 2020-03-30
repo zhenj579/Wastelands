@@ -63,7 +63,7 @@ public class TitleScreen extends BaseScreen {
 	public void update(float dt) {
 		if(Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY))
 		{
-			game.setScreen(new LevelScreen());
+			game.setScreen(new LevelScreen(game));
 			super.dispose();
 		}
 		Gdx.gl.glClearColor(1, 1, 1, 1);
