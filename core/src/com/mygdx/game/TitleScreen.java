@@ -34,14 +34,21 @@ public class TitleScreen extends BaseScreen {
 		Label text2 = new Label("Left click on the npc to interact with it and press E to open your inventory", skin);
 		Label text3 = new Label("As you collect more trash, you can trade it with the npc to unlock upgrades such as: ", skin);
 		Label text4 = new Label("speed upgrades, inventory upgrades, and vacuum upgrade.", skin);
-		Label text5 = new Label(" Clear the map of trash to win!", skin);
-		Label text6 = new Label("Press any key to continue", skin);
+		Label text5 = new Label("speed upgrade = increase speed", skin);
+		Label text6 = new Label("inventory upgrade = allows for stacking of items",skin);
+		Label text7 = new Label("vacuum upgrade = sucks trash within a radius without you having to click", skin);
+		Label text8 = new Label(" Clear the map of trash to win!", skin);
+		Label text9 = new Label("Press any key to continue", skin);
+		
 		text.setFontScale(2.5f);
 		text2.setFontScale(2.5f);
 		text3.setFontScale(2.5f);
 		text4.setFontScale(2.5f);
 		text5.setFontScale(2.5f);
 		text6.setFontScale(2.5f);
+		text7.setFontScale(2.5f);
+		text8.setFontScale(2.5f);
+		text9.setFontScale(2.5f);
 		
 		mainTable.add(text);
 		mainTable.row();
@@ -54,6 +61,12 @@ public class TitleScreen extends BaseScreen {
 		mainTable.add(text5);
 		mainTable.row();
 		mainTable.add(text6);
+		mainTable.row();
+		mainTable.add(text7);
+		mainTable.row();
+		mainTable.add(text8);
+		mainTable.row();
+		mainTable.add(text9);
 		
 		mainStage.addActor(mainTable);
 	}
