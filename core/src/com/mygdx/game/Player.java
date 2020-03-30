@@ -22,11 +22,11 @@ public class Player extends BaseActor{
 
 	private Inventory inv;
 	
-	private final float vacDistance = 150.0f;
+	private final float vacDistance = 50.0f;
 	
 	private boolean invUpgrd = false;
-	private boolean spdUpgrd = true;
-	private boolean vacUpgrd = true;
+	private boolean spdUpgrd = false;
+	private boolean vacUpgrd = false;
 	
 	public Player(float x, float y, Stage s, Table uiTable) {
 		super(x, y, s);
@@ -38,10 +38,7 @@ public class Player extends BaseActor{
         setAcceleration(45 * 4);
         setMaxSpeed(25);
         setDeceleration(45 * 4);
-        if(spdUpgrd) {
-        	this.activateSpeedEffect();
-        }
-        
+       
         inv = new Inventory(4,4, uiTable);
 	}
 	
@@ -64,19 +61,6 @@ public class Player extends BaseActor{
         if (Gdx.input.isKeyPressed(Keys.S)) {
         	cur = down;
             accelerateAtAngle(270);
-        }
-        
-        if (Gdx.input.isKeyJustPressed(Keys.Z)) {
-        	inv.addItem(new InventoryItem("trashedBottle", "bottles.png"));
-        }
-        if (Gdx.input.isKeyJustPressed(Keys.X)) {
-        	inv.addItem(new InventoryItem("trashedBook", "paper.png"));
-        }
-        if (Gdx.input.isKeyJustPressed(Keys.C)) {
-        	inv.addItem(new InventoryItem("trashedCan", "cans.png"));
-        }
-        if (Gdx.input.isKeyJustPressed(Keys.V)) {
-        	inv.addItem(new InventoryItem("trashedWood", "wood.png"));
         }
         
         toggleUI(dt);
@@ -106,7 +90,6 @@ public class Player extends BaseActor{
 		
 		boundToWorld();
 
-		
 	}
 	
 	public boolean isVacUpgrd() {

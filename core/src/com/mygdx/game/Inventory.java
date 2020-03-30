@@ -223,13 +223,10 @@ public class Inventory extends Actor{
 						if(f.getQuanity() >= cans) {
 							f.decrementQuantityBy(cans);
 							cansDone = true;
-							nCans -= cans;
 						} else {
 							cans -= f.getQuanity();
-							nCans -= f.getQuanity();
 							f.clearSlot();
 						}
-						//continue;
 					}
 				}
 				if(!paperDone) {
@@ -237,13 +234,10 @@ public class Inventory extends Actor{
 						if(f.getQuanity() >= paper) {
 							f.decrementQuantityBy(paper);
 							paperDone = true;
-							nPapers -= paper;
 						} else {
 							paper -= f.getQuanity();
-							nPapers -= f.getQuanity();
 							f.clearSlot();
 						}
-						//continue;
 					}
 				}
 				if(!bottlesDone) {
@@ -251,13 +245,10 @@ public class Inventory extends Actor{
 						if(f.getQuanity() >= bottles) {
 							f.decrementQuantityBy(bottles);
 							bottlesDone = true;
-							nBottles -= bottles;
 						} else {
 							bottles -= f.getQuanity();
-							nBottles -= f.getQuanity();
 							f.clearSlot();
 						}
-						//continue;
 					}
 				}
 				if(!woodDone) {
@@ -265,10 +256,8 @@ public class Inventory extends Actor{
 						if(f.getQuanity() >= wood) {
 							f.decrementQuantityBy(wood);
 							woodDone = true;
-							nWood -= wood;
 						} else {
 							wood -= f.getQuanity();
-							nWood -= f.getQuanity();
 							f.clearSlot();
 						}
 					}

@@ -31,21 +31,19 @@ public class WastelandTrash extends BaseActor{
 		this.ref = ref;
 		stage.addActor(this);	
 		i = index;
-//		this.setMaxSpeed(40);
-//		this.setAcceleration(380);
-//		this.setDeceleration(380);
-		//initAnim();
+
+		initAnim();
 	}
 	
 	@Override
 	public void act(float dt) {
 		super.act(dt);
 		if(vacAble && LevelScreen.wastelander.isVacUpgrd() && this.isWithinDistance(LevelScreen.wastelander.getVacDistance(), LevelScreen.wastelander)) {
-			Vector2 playerToActorVector = new Vector2(LevelScreen.wastelander.getX() - this.getX(), LevelScreen.wastelander.getY() - this.getY());
-			this.accelerateAtAngle(playerToActorVector.angle());
-			this.applyPhysics(dt);
+			new VacTrashActor(this.getX(), this.getY(), BaseScreen.mainStage, name);
+			this.destroy();
+			this.remove();
 		}
-		//Gdx.app.log("TrashName: ", name);
+		setAnimation(anim);
 	}
 	
 	public void setSFX(String path)
@@ -92,29 +90,52 @@ public class WastelandTrash extends BaseActor{
 	}
 	
 	public void initAnim() {
-		Texture sprite = new Texture("trash_sprites.png");
-
-		TextureRegion[][] tr = TextureRegion.split(sprite, 16, 16);	
-		Array<TextureRegion> textureArray = new Array<TextureRegion>();
-		
+	
 		if(name.equals("trashedCan")) {
-			textureArray.add( tr[0][0]);
+			Texture sprite = new Texture("can_world.png");
+			TextureRegion[][] tr = TextureRegion.split(sprite, 16, 16);
+			
+			Array<TextureRegion> textureArray = new Array<TextureRegion>();
+			
+			for (int c = 0; c < 1; c++)
+				textureArray.add( tr[0][c]);
+			
 			anim = new Animation<TextureRegion>(0.0f, textureArray, Animation.PlayMode.LOOP_PINGPONG);
 		}
 		if(name.equals("trashedBottle")) {
-			textureArray.add( tr[0][1]);
+			Texture sprite = new Texture("bottle_world.png");
+			TextureRegion[][] tr = TextureRegion.split(sprite, 16, 16);
+			
+			Array<TextureRegion> textureArray = new Array<TextureRegion>();
+			
+			for (int c = 0; c < 1; c++)
+				textureArray.add( tr[0][c]);
+			
 			anim = new Animation<TextureRegion>(0.0f, textureArray, Animation.PlayMode.LOOP_PINGPONG);
 		}
 		if(name.equals("brokenChair")) {
-			textureArray.add( tr[0][2]);
+			Texture sprite = new Texture("wood_world.png");
+			TextureRegion[][] tr = TextureRegion.split(sprite, 16, 16);
+			
+			Array<TextureRegion> textureArray = new Array<TextureRegion>();
+			
+			for (int c = 0; c < 1; c++)
+				textureArray.add( tr[0][c]);
+			
 			anim = new Animation<TextureRegion>(0.0f, textureArray, Animation.PlayMode.LOOP_PINGPONG);
 		}
 		if(name.equals("trashedBook")) {
-			textureArray.add( tr[0][3]);
+			Texture sprite = new Texture("paper_world.png");
+			TextureRegion[][] tr = TextureRegion.split(sprite, 16, 16);
+			
+			Array<TextureRegion> textureArray = new Array<TextureRegion>();
+			
+			for (int c = 0; c < 1; c++)
+				textureArray.add( tr[0][c]);
+			
 			anim = new Animation<TextureRegion>(0.0f, textureArray, Animation.PlayMode.LOOP_PINGPONG);
 		}
 		
-		anim = new Animation<TextureRegion>(0.0f, textureArray, Animation.PlayMode.LOOP_PINGPONG);
 		
 		setAnimation(anim);
 	}
