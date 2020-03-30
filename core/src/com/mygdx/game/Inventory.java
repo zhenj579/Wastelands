@@ -214,6 +214,18 @@ public class Inventory extends Actor{
 		return nCans >= can && nBottles >= bottle && nPapers >= paper && nWood >= wood;
 	}
 	
+	public boolean isFull() {
+		int count = 0;
+		for(InventoryItemSlot[] e : bts) {
+			for(InventoryItemSlot f : e) {
+				if(!f.isEmpty()) {
+					count++;
+				}
+			}
+		}
+		return count == nRows * nCols;
+	}
+	
 	public void deduct(int cans, int bottles, int paper, int wood) {
 		boolean cansDone = false, bottlesDone = false, paperDone = false, woodDone = false;
 		for(InventoryItemSlot[] e : bts) {

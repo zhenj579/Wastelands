@@ -51,8 +51,10 @@ public class VacTrashActor extends BaseActor{
 			this.applyPhysics(dt);
 		}
 		if(this.overlaps(LevelScreen.wastelander)) {
-			LevelScreen.wastelander.getInventory().addItem(new InventoryItem(itemName, itemTexture));
-			this.remove();
+			if(!LevelScreen.wastelander.getInventory().isFull()) {
+				LevelScreen.wastelander.getInventory().addItem(new InventoryItem(itemName, itemTexture));
+				this.remove();
+			}
 		}
 		setAnimation(anim);
 	}

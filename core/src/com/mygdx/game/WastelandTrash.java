@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Timer;
 
 public class WastelandTrash extends BaseActor{
 	
@@ -17,7 +18,6 @@ public class WastelandTrash extends BaseActor{
 	int i = 0;
 	private Sound sfx;
 	private boolean vacAble = true;
-	private Animation<TextureRegion> anim;
 	
 	public WastelandTrash(String name, float x, float y, Stage stage, Map ref, int index)
 	{
@@ -32,18 +32,24 @@ public class WastelandTrash extends BaseActor{
 		stage.addActor(this);	
 		i = index;
 
-		initAnim();
 	}
 	
 	@Override
 	public void act(float dt) {
 		super.act(dt);
 		if(vacAble && LevelScreen.wastelander.isVacUpgrd() && this.isWithinDistance(LevelScreen.wastelander.getVacDistance(), LevelScreen.wastelander)) {
-			new VacTrashActor(this.getX(), this.getY(), BaseScreen.mainStage, name);
+			VacTrashActor actor = new VacTrashActor(this.getX(), this.getY(), BaseScreen.mainStage, name);
+//			Timer.schedule(new Timer.Task() {
+//				
+//				@Override
+//				public void run() {
+//					if()
+//				}a
+//				
+//			}, delaySeconds, intervalSeconds, repeatCount);
 			this.destroy();
 			this.remove();
 		}
-		setAnimation(anim);
 	}
 	
 	public void setSFX(String path)
@@ -89,54 +95,4 @@ public class WastelandTrash extends BaseActor{
 		return false;
 	}
 	
-	public void initAnim() {
-	
-		if(name.equals("trashedCan")) {
-			Texture sprite = new Texture("can_world.png");
-			TextureRegion[][] tr = TextureRegion.split(sprite, 16, 16);
-			
-			Array<TextureRegion> textureArray = new Array<TextureRegion>();
-			
-			for (int c = 0; c < 1; c++)
-				textureArray.add( tr[0][c]);
-			
-			anim = new Animation<TextureRegion>(0.0f, textureArray, Animation.PlayMode.LOOP_PINGPONG);
-		}
-		if(name.equals("trashedBottle")) {
-			Texture sprite = new Texture("bottle_world.png");
-			TextureRegion[][] tr = TextureRegion.split(sprite, 16, 16);
-			
-			Array<TextureRegion> textureArray = new Array<TextureRegion>();
-			
-			for (int c = 0; c < 1; c++)
-				textureArray.add( tr[0][c]);
-			
-			anim = new Animation<TextureRegion>(0.0f, textureArray, Animation.PlayMode.LOOP_PINGPONG);
-		}
-		if(name.equals("brokenChair")) {
-			Texture sprite = new Texture("wood_world.png");
-			TextureRegion[][] tr = TextureRegion.split(sprite, 16, 16);
-			
-			Array<TextureRegion> textureArray = new Array<TextureRegion>();
-			
-			for (int c = 0; c < 1; c++)
-				textureArray.add( tr[0][c]);
-			
-			anim = new Animation<TextureRegion>(0.0f, textureArray, Animation.PlayMode.LOOP_PINGPONG);
-		}
-		if(name.equals("trashedBook")) {
-			Texture sprite = new Texture("paper_world.png");
-			TextureRegion[][] tr = TextureRegion.split(sprite, 16, 16);
-			
-			Array<TextureRegion> textureArray = new Array<TextureRegion>();
-			
-			for (int c = 0; c < 1; c++)
-				textureArray.add( tr[0][c]);
-			
-			anim = new Animation<TextureRegion>(0.0f, textureArray, Animation.PlayMode.LOOP_PINGPONG);
-		}
-		
-		
-		setAnimation(anim);
-	}
 }

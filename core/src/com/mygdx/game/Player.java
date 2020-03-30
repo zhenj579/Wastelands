@@ -63,6 +63,16 @@ public class Player extends BaseActor{
             accelerateAtAngle(270);
         }
         
+        if (Gdx.input.isKeyPressed(Keys.V)) {
+        	this.activateVacEffect();
+        }
+        if (Gdx.input.isKeyPressed(Keys.F)) {
+        	this.activateSpeedEffect();;
+        }
+        if (Gdx.input.isKeyPressed(Keys.B)) {
+        	this.activateBackEffect();;
+        }
+        
         toggleUI(dt);
         
         if(getSpeed() == 0) {
@@ -79,6 +89,8 @@ public class Player extends BaseActor{
         		cur = sdown;
         	}
         }
+        
+        
         
         setAnimation(cur);
         
