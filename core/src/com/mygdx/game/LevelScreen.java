@@ -43,12 +43,21 @@ public class LevelScreen extends BaseScreen
 
     	uiTable.setVisible(true);	
     	
+    	
     	backgroundMusic = Gdx.audio.newSound(Gdx.files.internal("backgroundmusic.mp3"));
     	backgroundMusic.loop(0.1f);
     }
     
     public void update(float dt)
     {
+    	if(!wastelander.hasinvUpgrd())
+    	{
+    		wastelander.getInventory().setDragging(false);
+    	}
+    	else
+    	{
+    		wastelander.getInventory().setDragging(true);
+    	}
     	if(map.isEmpty())
     	{
     		game.setScreen(new EndScreen());

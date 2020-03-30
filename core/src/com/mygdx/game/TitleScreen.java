@@ -31,7 +31,7 @@ public class TitleScreen extends BaseScreen {
 		mainTable.getPadTop();
 		
 		Label text = new Label("Hi, controls are as follows: WASD to move, left click while you're standing on top of the trash to collect it.", skin);
-		Label text2 = new Label("Press any key to continue!", skin);
+		Label text2 = new Label("Left click on the npc to interact with it and press E to open your inventory", skin);
 		Label text3 = new Label("As you collect more trash, you can trade it with the npc to unlock upgrades such as: ", skin);
 		Label text4 = new Label("speed upgrades, inventory upgrades, and vacuum upgrade.", skin);
 		Label text5 = new Label(" Clear the map of trash to win!", skin);
