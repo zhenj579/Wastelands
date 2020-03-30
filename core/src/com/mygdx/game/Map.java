@@ -95,26 +95,26 @@ public class Map extends Actor {
 				t.getValue().addListener(new ClickListener() {
 					public void clicked(InputEvent event, float x, float y)
 					{
-						if(t.getValue().isDestroyed() && player.isWithinDistance(24, t.getValue()))
+						Vector2 screenToStage = BaseScreen.mainStage.screenToStageCoordinates(new Vector2(x, y));
+						if(t.getValue().isDestroyed() && player.isWithinDistance(34, t.getValue()) || t.getValue().getBoundaryPolygon().contains(screenToStage))
 						{
 							InventoryItem item;
 							if(t.getValue().getName().equals("trashedBottle"))
 							{
-								item = new InventoryItem("bottles.png");
+								item = new InventoryItem("trashedBottle", "bottles.png");
 							}
 							else if(t.getValue().getName().equals("trashedBook"))
 							{
-								item = new InventoryItem("paper.png");
+								item = new InventoryItem("trashedBook", "paper.png");
 							}
 							else if(t.getValue().getName().equals("trashedCan"))
 							{
-								item = new InventoryItem("cans.png");
+								item = new InventoryItem("trashedCan", "cans.png");
 							}
 							else
 							{
-								item = new InventoryItem("wood.png");
+								item = new InventoryItem("trashedWood", "wood.png");
 							}
-							item.setName(getName());
 							player.getInventory().addItem(item);
 							t.getValue().remove();
 							t.getValue().playSFX();
