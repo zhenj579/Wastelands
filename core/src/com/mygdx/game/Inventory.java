@@ -26,6 +26,8 @@ public class Inventory extends Actor{
 	private static final int itemMinSlotWidth = 60;
 	private static final int itemMinSlotHeight = 60;
 	
+	private boolean allowStacking = false;
+
 	public Inventory(int nRows, int nCols, Table uiTable) {
 		this.nRows = nRows;
 		this.nCols = nCols;
@@ -91,7 +93,7 @@ public class Inventory extends Actor{
 					bts[r][c].setItem(item);
 					bts[r][c].increaseQuantityBy(amount);
 					return;
-				} else if(bts[r][c].getItem().equals(item)) {
+				} else if(bts[r][c].getItem().equals(item)  && allowStacking) {
 					bts[r][c].incrementQuantity();
 					return;
 				}
@@ -106,7 +108,7 @@ public class Inventory extends Actor{
 				if(bts[r][c].isEmpty()) {
 					bts[r][c].setItem(item);
 					return;
-				} else if(bts[r][c].getItem().equals(item)) {
+				} else if(bts[r][c].getItem().equals(item) && allowStacking) {
 					bts[r][c].incrementQuantity();
 					return;
 				}
@@ -119,6 +121,11 @@ public class Inventory extends Actor{
 			return;
 		}
 		if(!destination.isEmpty()) {
+			if(destination.getItem().equals(source.getItem())) {
+				destination.increaseQuantityBy(source.getQuanity());
+				source.clearSlot();
+				return;
+			}
 			InventoryItemSlot temp = destination.getItemSlotCopy();
 			destination.setItem(source.getItem(), source.getQuanity());
 			source.setItem(temp.getItem(), temp.getQuanity());
@@ -154,5 +161,17 @@ public class Inventory extends Actor{
 	
 	public void setDragging(boolean drag) {
 		dragging = drag;
+	}
+	
+	public boolean isAllowStacking() {
+		return allowStacking;
+	}
+
+	public void setAllowStacking(boolean allowStacking) {
+		this.allowStacking = allowStacking;
+	}
+	
+	public boolean canAfford() {
+		return false;
 	}
 }

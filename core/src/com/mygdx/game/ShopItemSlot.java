@@ -9,10 +9,12 @@ public class ShopItemSlot extends InventoryItemSlot {
 	private int paperPrice = 0;
 	private int woodPrice = 0;
 	
-	public ShopItemSlot() {
-		super();
-		super.setShopSlot(true);
-	}
+	private boolean isBack = false;
+	private boolean isSpd = false;
+	private boolean isVac = false;
+	
+
+
 	
 
 	@Override
@@ -22,6 +24,40 @@ public class ShopItemSlot extends InventoryItemSlot {
 			batch.draw(item.itemTextureRegion, getX() + getWidth() / 2 - 16, getY() + getHeight() / 2 - 16);
 		}
 		super.validate();
+	}
+	
+	public boolean isBack() {
+		return isBack;
+	}
+	
+	public void setBack(boolean isBck) {
+		this.isBack = isBck;
+	}
+	
+	
+	public boolean isSpd() {
+		return isSpd;
+	}
+	
+	
+	public void setSpd(boolean isSpd) {
+		this.isSpd = isSpd;
+	}
+	
+	
+	public boolean isVac() {
+		return isVac;
+	}
+	
+	
+	public void setVac(boolean isVac) {
+		this.isVac = isVac;
+	}
+	
+	
+	public ShopItemSlot() {
+		super();
+		super.setShopSlot(true);
 	}
 	
 	public void setPrice(int can, int bottle, int paper, int wood) {
@@ -61,5 +97,17 @@ public class ShopItemSlot extends InventoryItemSlot {
 	
 	public void setWoodPrice(int woodPrice) {
 		this.woodPrice = woodPrice;
+	}
+	
+	public void activateEffect() {
+		if(isBack && !isSpd && !isVac) {
+			LevelScreen.wastelander.activateBackEffect();
+		}
+		if(!isBack && isSpd && !isVac) {
+			LevelScreen.wastelander.activateSpeedEffect();
+		}
+		if(!isBack && !isSpd && isVac) {
+			LevelScreen.wastelander.activateVacEffect();
+		}
 	}
 }

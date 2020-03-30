@@ -12,7 +12,7 @@ public class LevelScreen extends BaseScreen
 {
     private Map map;
     private Npc merchant;
-	private Player wastelander;	
+	public static Player wastelander;	
 	private Sound backgroundMusic;
 	
     public void initialize() 
@@ -33,7 +33,6 @@ public class LevelScreen extends BaseScreen
     			}
     		}
     	});
-
 
     	uiTable.setVisible(true);	
     	

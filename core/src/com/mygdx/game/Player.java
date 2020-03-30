@@ -21,8 +21,8 @@ public class Player extends BaseActor{
 
 	private Inventory inv;
 	
-	private boolean spdUpgrd = false;
 	private boolean invUpgrd = false;
+	private boolean spdUpgrd = false;
 	private boolean vacUpgrd = false;
 	
 	public Player(float x, float y, Stage s, Table uiTable) {
@@ -88,6 +88,18 @@ public class Player extends BaseActor{
 		boundToWorld();
 
 		
+	}
+	
+	public void activateBackEffect() {
+		inv.setAllowStacking(true);
+		invUpgrd = true;
+	}
+	public void activateSpeedEffect() {
+		setMaxSpeed(50);
+		spdUpgrd = true;
+	}
+	public void activateVacEffect() {
+		vacUpgrd = true;
 	}
 	
 	public void toggleUI(float dt) {

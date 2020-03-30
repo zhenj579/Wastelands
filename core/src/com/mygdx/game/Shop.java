@@ -23,16 +23,19 @@ public class Shop extends Actor {
 				bt[i].setItem(new InventoryItem("backpack_pwr.png"));
 				bt[i].setPrice(1, 1, 1, 1);
 				bt[i].addListener(new ShopItemListener(bt[i]));
+				bt[i].setBack(true);
 			}
 			if(i == 1) {
 				bt[i].setItem(new InventoryItem("speedup_pwr.png"));
 				bt[i].setPrice(2, 2, 2, 2);
 				bt[i].addListener(new ShopItemListener(bt[i]));
+				bt[i].setSpd(true);
 			}
 			if(i == 2) {
 				bt[i].setItem(new InventoryItem("vac_pwr.png"));
 				bt[i].setPrice(3, 3, 3, 3);
 				bt[i].addListener(new ShopItemListener(bt[i]));
+				bt[i].setVac(true);
 			}
 			shop.add(bt[i]).minWidth(itemMinSlotWidth).minHeight(itemMinSlotHeight).maxWidth(itemMaxSlotWidth).maxHeight(itemMaxSlotHeight);
 		}

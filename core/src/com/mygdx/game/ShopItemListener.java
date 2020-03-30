@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -14,12 +15,13 @@ public class ShopItemListener extends ClickListener {
 		this.ref = slot;
 		BaseScreen.uiStage.addActor(label);
 		label.setFontScale(1.0f);
+		label.setColor(Color.GOLD);
 		label.setVisible(false);
 	}
 	
 	@Override
 	public void clicked(InputEvent event, float x, float y) {
-		
+		ref.activateEffect();
 	}
 	
 	@Override
