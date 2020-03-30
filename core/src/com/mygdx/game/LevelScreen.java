@@ -16,6 +16,7 @@ public class LevelScreen extends BaseScreen
 	public static Player wastelander;	
 	private Sound backgroundMusic;
 	private Game game;
+	private VactTestActor vta;
 	
 	public LevelScreen(Game game)
 	{
@@ -26,7 +27,8 @@ public class LevelScreen extends BaseScreen
     {   
     	//MAP HAS TO BE LOADED IN FIRST BEFORE ANY OTHER ACTOR
     	map = new Map("wasteland_test_map.tmx", mainStage);
-
+    	
+    	vta = new VactTestActor(700, 400, mainStage);
     	//Otherwise the actor wont be drawn and its events wont be called	
     	merchant = new Npc(565, 420, mainStage, uiTable);
     	wastelander = new Player(530, 400, mainStage, uiTable);
@@ -43,8 +45,8 @@ public class LevelScreen extends BaseScreen
 
     	uiTable.setVisible(true);	
     	
-    	backgroundMusic = Gdx.audio.newSound(Gdx.files.internal("backgroundmusic.mp3"));
-    	backgroundMusic.loop(0.1f);
+    	//backgroundMusic = Gdx.audio.newSound(Gdx.files.internal("backgroundmusic.mp3"));
+    	//backgroundMusic.loop(0.1f);
     }
     
     public void update(float dt)

@@ -17,13 +17,16 @@ public class Player extends BaseActor{
 	
 	private final float frameDuration = 0.25f;
 	private float uidt = 0.0f;
+
 	private Table uiTable;
 
 	private Inventory inv;
 	
+	private final float vacDistance = 150.0f;
+	
 	private boolean invUpgrd = false;
-	private boolean spdUpgrd = false;
-	private boolean vacUpgrd = false;
+	private boolean spdUpgrd = true;
+	private boolean vacUpgrd = true;
 	
 	public Player(float x, float y, Stage s, Table uiTable) {
 		super(x, y, s);
@@ -35,6 +38,9 @@ public class Player extends BaseActor{
         setAcceleration(45 * 4);
         setMaxSpeed(25);
         setDeceleration(45 * 4);
+        if(spdUpgrd) {
+        	this.activateSpeedEffect();
+        }
         
         inv = new Inventory(4,4, uiTable);
 	}
@@ -101,6 +107,18 @@ public class Player extends BaseActor{
 		boundToWorld();
 
 		
+	}
+	
+	public boolean isVacUpgrd() {
+		return vacUpgrd;
+	}
+	
+	public void setVacUpgrd(boolean vacUpgrd) {
+		this.vacUpgrd = vacUpgrd;
+	}
+	
+	public float getVacDistance() {
+		return vacDistance;
 	}
 	
 	public void activateBackEffect() {
