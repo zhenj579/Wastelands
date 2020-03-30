@@ -47,10 +47,6 @@ public class Shop extends Actor {
 		
 		BaseScreen.uiStage.addActor(this);
 	}
-	
-	private void initShop() {
-		
-	}
 
 	public boolean isVisible() {
 		return shop.isVisible();

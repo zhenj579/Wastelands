@@ -77,7 +77,6 @@ public class InventoryItemSlot extends Button{
 		if(this.item != null && this.item.equals(item)) {
 			incrementQuantity();
 			updateLabel();
-			return;
 		} else {
 			this.item = item;
 			incrementQuantity();

@@ -104,6 +104,11 @@ public class Player extends BaseActor{
 		return vacDistance;
 	}
 	
+	public boolean hasVacEffect()
+	{
+		return vacUpgrd;
+	}
+	
 	public void activateBackEffect() {
 		inv.setAllowStacking(true);
 		invUpgrd = true;

@@ -22,7 +22,7 @@ public class EndScreen extends BaseScreen {
 		mainTable.setFillParent(true);
 		mainTable.getPadTop();
 		
-		Label text = new Label("Thank you for playing the game, this is the end for now!", skin);
+		Label text = new Label("You won!, thank you for playing the game, this is the end for now!", skin);
 		Label text1 = new Label("Press any key to exit", skin);
 		
 		text.setFontScale(3.0f);
@@ -32,7 +32,7 @@ public class EndScreen extends BaseScreen {
 		mainTable.row();
 		mainTable.add(text1);
 		
-		super.mainStage.addActor(mainTable);
+		mainStage.addActor(mainTable);
 	}
 
 	@Override
