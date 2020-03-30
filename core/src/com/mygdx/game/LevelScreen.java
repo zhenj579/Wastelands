@@ -47,16 +47,16 @@ public class LevelScreen extends BaseScreen
     	}
     	Vector2 wastelanderCoordinates = new Vector2((int)wastelander.getX(), (int)wastelander.getY());
     	WastelandTrash trash = map.getTrashAt(wastelanderCoordinates, wastelander);
-    	if(trash != null)
-    	{
-    		if(wastelander.overlaps(trash)) {
-    			trash.remove();
-    			//wastelander.getInventory().addItem(item);
-    			System.out.println(trash.getName());
-    		}
-    		trash.destroy();
-//    		map.printObjectState();
-    	}
+//    	if(trash != null)
+//    	{
+//    		if(wastelander.overlaps(trash)) {
+//    			trash.remove();
+//    			//wastelander.getInventory().addItem(item);
+//    			System.out.println(trash.getName());
+//    		}
+//    		trash.destroy();
+////    		map.printObjectState();
+//    	}
     	mainStage.act(dt);
     	uiStage.act(dt);
     }
