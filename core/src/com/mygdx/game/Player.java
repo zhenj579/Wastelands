@@ -39,11 +39,6 @@ public class Player extends BaseActor{
         inv = new Inventory(4,4, uiTable);
 	}
 	
-	public boolean hasinvUpgrd()
-	{
-		return invUpgrd;
-	}
-	
 	public void act(float dt) {
 		
 		super.act(dt);

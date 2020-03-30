@@ -50,14 +50,6 @@ public class LevelScreen extends BaseScreen
     
     public void update(float dt)
     {
-    	if(!wastelander.hasinvUpgrd())
-    	{
-    		wastelander.getInventory().setDragging(false);
-    	}
-    	else
-    	{
-    		wastelander.getInventory().setDragging(true);
-    	}
     	if(map.isEmpty())
     	{
     		game.setScreen(new EndScreen());
