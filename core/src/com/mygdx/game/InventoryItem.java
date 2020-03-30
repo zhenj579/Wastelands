@@ -10,10 +10,11 @@ public class InventoryItem {
 	protected String path;
 	protected String itemName;
 	
-	public InventoryItem(String texturePath) {
+	public InventoryItem(String name, String texturePath) {
 		itemTexture = new Texture(texturePath);
 		itemTextureRegion = new TextureRegion(itemTexture);
 		this.path = texturePath;
+		this.itemName = name;
 	}
 	
 	public void setName(String name)

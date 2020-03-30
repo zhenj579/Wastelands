@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 public abstract class BaseScreen implements Screen, InputProcessor
 {
-    protected Stage mainStage;
+	public static Stage mainStage;
     public static Stage uiStage;
     public static Table uiTable;
 

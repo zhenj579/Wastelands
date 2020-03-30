@@ -60,6 +60,19 @@ public class Player extends BaseActor{
             accelerateAtAngle(270);
         }
         
+        if (Gdx.input.isKeyJustPressed(Keys.Z)) {
+        	inv.addItem(new InventoryItem("trashedBottle", "bottles.png"));
+        }
+        if (Gdx.input.isKeyJustPressed(Keys.X)) {
+        	inv.addItem(new InventoryItem("trashedBook", "paper.png"));
+        }
+        if (Gdx.input.isKeyJustPressed(Keys.C)) {
+        	inv.addItem(new InventoryItem("trashedCan", "cans.png"));
+        }
+        if (Gdx.input.isKeyJustPressed(Keys.V)) {
+        	inv.addItem(new InventoryItem("trashedWood", "wood.png"));
+        }
+        
         toggleUI(dt);
         
         if(getSpeed() == 0) {

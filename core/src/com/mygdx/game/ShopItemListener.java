@@ -21,7 +21,10 @@ public class ShopItemListener extends ClickListener {
 	
 	@Override
 	public void clicked(InputEvent event, float x, float y) {
-		ref.activateEffect();
+		if(LevelScreen.wastelander.getInventory().canAfford(ref.getCanPrice(), ref.getBottlePrice(), ref.getPaperPrice(), ref.getWoodPrice())) {
+			ref.activateEffect();
+			LevelScreen.wastelander.getInventory().deduct(ref.getCanPrice(), ref.getBottlePrice(), ref.getPaperPrice(), ref.getWoodPrice());
+		}
 	}
 	
 	@Override

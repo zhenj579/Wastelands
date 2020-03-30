@@ -12,10 +12,6 @@ public class ShopItemSlot extends InventoryItemSlot {
 	private boolean isBack = false;
 	private boolean isSpd = false;
 	private boolean isVac = false;
-	
-
-
-	
 
 	@Override
 	public void draw(Batch batch, float parentAlpha) {

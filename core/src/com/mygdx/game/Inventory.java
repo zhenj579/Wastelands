@@ -26,6 +26,11 @@ public class Inventory extends Actor{
 	private static final int itemMinSlotWidth = 60;
 	private static final int itemMinSlotHeight = 60;
 	
+	private int nCans = 0;
+	private int nBottles = 0;
+	private int nPapers = 0;
+	private int nWood = 0;
+	
 	private boolean allowStacking = false;
 
 	public Inventory(int nRows, int nCols, Table uiTable) {
@@ -89,9 +94,26 @@ public class Inventory extends Actor{
 	public void addItem(InventoryItem item, int amount) {
 		for(int r = 0; r < nRows; r++) {
 			for(int c = 0; c < nCols; c++) {
+				if(bts[r][c].getItem() != null && bts[r][c].getItem().equals(item) && allowStacking) {
+					bts[r][c].increaseQuantityBy(amount);
+					return;
+				}
+			}
+		}
+		for(int r = 0; r < nRows; r++) {
+			for(int c = 0; c < nCols; c++) {
 				if(bts[r][c].isEmpty()) {
 					bts[r][c].setItem(item);
 					bts[r][c].increaseQuantityBy(amount);
+					if(item.getName().equals("trashedBottle")) {
+						nBottles++;
+					} else if(item.getName().equals("trashedBook")) {
+						nPapers++;
+					} else if(item.getName().equals("trashedCan")) {
+						nCans++;
+					} else if(item.getName().equals("trashedWood")) {
+						nWood++;
+					}
 					return;
 				} else if(bts[r][c].getItem().equals(item)  && allowStacking) {
 					bts[r][c].incrementQuantity();
@@ -105,8 +127,25 @@ public class Inventory extends Actor{
 	public void addItem(InventoryItem item) {
 		for(int r = 0; r < nRows; r++) {
 			for(int c = 0; c < nCols; c++) {
+				if(bts[r][c].getItem() != null && bts[r][c].getItem().equals(item) && allowStacking) {
+					bts[r][c].incrementQuantity();
+					return;
+				}
+			}
+		}
+		for(int r = 0; r < nRows; r++) {
+			for(int c = 0; c < nCols; c++) {
 				if(bts[r][c].isEmpty()) {
 					bts[r][c].setItem(item);
+					if(item.getName().equals("trashedBottle")) {
+						nBottles++;
+					} else if(item.getName().equals("trashedBook")) {
+						nPapers++;
+					} else if(item.getName().equals("trashedCan")) {
+						nCans++;
+					} else if(item.getName().equals("trashedWood")) {
+						nWood++;
+					}
 					return;
 				} else if(bts[r][c].getItem().equals(item) && allowStacking) {
 					bts[r][c].incrementQuantity();
@@ -171,7 +210,68 @@ public class Inventory extends Actor{
 		this.allowStacking = allowStacking;
 	}
 	
-	public boolean canAfford() {
-		return false;
+	public boolean canAfford(int can, int bottle, int paper, int wood) {
+		return nCans >= can && nBottles >= bottle && nPapers >= paper && nWood >= wood;
+	}
+	
+	public void deduct(int cans, int bottles, int paper, int wood) {
+		boolean cansDone = false, bottlesDone = false, paperDone = false, woodDone = false;
+		for(InventoryItemSlot[] e : bts) {
+			for(InventoryItemSlot f : e) {
+				if(!cansDone) {
+					if(f.getItem() != null && f.getItem().getName().equals("trashedCan")) {
+						if(f.getQuanity() >= cans) {
+							f.decrementQuantityBy(cans);
+							f.updateLabel();
+							cansDone = true;
+						} else {
+							cans -= f.getQuanity();
+							f.clearSlot();
+						}
+						//continue;
+					}
+				}
+				if(!paperDone) {
+					if(f.getItem() != null && f.getItem().getName().equals("trashedBook")) {
+						if(f.getQuanity() >= paper) {
+							f.decrementQuantityBy(paper);
+							paperDone = true;
+						} else {
+							paper -= f.getQuanity();
+							f.clearSlot();
+							f.updateLabel();
+						}
+						//continue;
+					}
+				}
+				if(!bottlesDone) {
+					if(f.getItem() != null && f.getItem().getName().equals("trashedBottle")) {
+						if(f.getQuanity() >= bottles) {
+							f.decrementQuantityBy(bottles);
+							bottlesDone = true;
+						} else {
+							bottles -= f.getQuanity();
+							f.clearSlot();
+						}
+						//continue;
+					}
+				}
+				if(!woodDone) {
+					if(f.getItem() != null && f.getItem().getName().equals("trashedWood")) {
+						if(f.getQuanity() >= wood) {
+							f.decrementQuantityBy(wood);
+							f.updateLabel();
+							woodDone = true;
+						} else {
+							wood -= f.getQuanity();
+							f.clearSlot();
+						}
+					}
+				}
+				f.updateLabel();
+				if(f.getItem() != null)
+					Gdx.app.log("Deduct", f.getItem().getName() + " " + f.getQuanity());
+			}
+		}
 	}
 }

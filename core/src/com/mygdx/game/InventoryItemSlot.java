@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 public class InventoryItemSlot extends Button{
 	
 	protected InventoryItem item;
-	private int quantity = 1;
+	private int quantity = 0;
 	protected Label quantityLabel;
 	protected boolean hidden = false;
 	
@@ -27,7 +27,7 @@ public class InventoryItemSlot extends Button{
 	public void act(float dt) {
 		super.act(dt);
 		if(item != null && quantity > 1) {
-			quantityLabel.setText(quantity + "");;
+			quantityLabel.setText(quantity + "");
 			quantityLabel.setVisible(true);
 		} else {
 			quantityLabel.setVisible(false);
@@ -46,6 +46,10 @@ public class InventoryItemSlot extends Button{
 			}
 		}
 		super.validate();
+	}
+	
+	public void updateLabel() {
+		quantityLabel.setText(quantity + "");
 	}
 	
 	public void clearSlot() {
@@ -70,29 +74,47 @@ public class InventoryItemSlot extends Button{
 	}
 	
 	public void setItem(InventoryItem item) {
-		this.item = item;
-		if(quantity > 1)
-		{
-			quantity++;
+		if(this.item != null && this.item.equals(item)) {
+			incrementQuantity();
+			updateLabel();
+			return;
+		} else {
+			this.item = item;
+			incrementQuantity();
+			updateLabel();
 		}
-		
 	}
 	
 	public void setItem(InventoryItem item, int q) {
 		this.item = item;
 		this.quantity = q;
+		updateLabel();
 	}
 	
 	public void setQuantity(int q) {
 		this.quantity = q;
+		updateLabel();
 	}
 	
 	public void incrementQuantity() {
 		quantity++;
+		updateLabel();
 	}
 	
 	public void decrementQuantity() {
 		quantity--;
+		if(quantity == 0) {
+			this.clearSlot();
+		}
+		updateLabel();
+	}
+	
+	public void decrementQuantityBy(int amount) {
+		quantity -= amount;
+		if(quantity == 0) {
+			this.clearSlot();
+		}
+		updateLabel();
 	}
 	
 	public InventoryItem getItem() {
@@ -113,6 +135,7 @@ public class InventoryItemSlot extends Button{
 	
 	public void increaseQuantityBy(int amount) {
 		quantity += amount;
+		updateLabel();
 	}
 	
 	public InventoryItemSlot getItemSlotCopy() {
