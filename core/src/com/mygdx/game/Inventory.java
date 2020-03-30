@@ -160,7 +160,7 @@ public class Inventory extends Actor{
 			return;
 		}
 		if(!destination.isEmpty()) {
-			if(destination.getItem().equals(source.getItem())) {
+			if(destination.getItem().equals(source.getItem()) && allowStacking) {
 				destination.increaseQuantityBy(source.getQuanity());
 				source.clearSlot();
 				return;
