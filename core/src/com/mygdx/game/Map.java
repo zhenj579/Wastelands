@@ -96,7 +96,7 @@ public class Map extends Actor {
 					public void clicked(InputEvent event, float x, float y)
 					{
 						Vector2 screenToStage = BaseScreen.mainStage.screenToStageCoordinates(new Vector2(x, y));
-						if(t.getValue().isDestroyed() && player.isWithinDistance(34, t.getValue()) || t.getValue().getBoundaryPolygon().contains(screenToStage))
+						if(t.getValue().isDestroyed() && player.isWithinDistance(34, t.getValue()))
 						{
 							InventoryItem item;
 							if(t.getValue().getName().equals("trashedBottle"))
@@ -129,14 +129,6 @@ public class Map extends Actor {
 			{
 
 				t.getValue().destroy();
-				return t.getValue();
-			}
-			else if(coordinates.x >= entry.x - 48 && coordinates.x <= entry.x + 48
-					&& coordinates.y >= entry.y - 48 && coordinates.y <= entry.y + 48 && player.hasVacEffect())
-			{
-				t.getValue().remove();
-				t.getValue().destroy();
-				mapObjects.remove(entry);
 				return t.getValue();
 			}
 		}

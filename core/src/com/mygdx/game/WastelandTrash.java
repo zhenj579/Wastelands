@@ -37,16 +37,8 @@ public class WastelandTrash extends BaseActor{
 	@Override
 	public void act(float dt) {
 		super.act(dt);
-		if(vacAble && LevelScreen.wastelander.isVacUpgrd() && this.isWithinDistance(LevelScreen.wastelander.getVacDistance(), LevelScreen.wastelander)) {
-			VacTrashActor actor = new VacTrashActor(this.getX(), this.getY(), BaseScreen.mainStage, name);
-//			Timer.schedule(new Timer.Task() {
-//				
-//				@Override
-//				public void run() {
-//					if()
-//				}a
-//				
-//			}, delaySeconds, intervalSeconds, repeatCount);
+		if(vacAble && LevelScreen.wastelander.isVacUpgrd() && LevelScreen.wastelander.isWithinDistance(LevelScreen.wastelander.getVacDistance(), this)) {
+			new VacTrashActor(this.getX(), this.getY(), BaseScreen.mainStage, name, this);
 			this.destroy();
 			this.remove();
 		}

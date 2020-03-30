@@ -174,6 +174,17 @@ public class Inventory extends Actor{
 		source.clearSlot();
 	}
 	
+	public boolean hasSpace(String name) {
+		for(InventoryItemSlot[] e : bts) {
+			for(InventoryItemSlot f : e) {
+				if(f.getItem() != null && f.getItem().getName().equals(name) || f.isEmpty()) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
 	public void setCurSel(InventoryItemSlot bt) {
 		curSelected = bt;
 	}
@@ -215,6 +226,8 @@ public class Inventory extends Actor{
 	}
 	
 	public boolean isFull() {
+		if(allowStacking)
+			return false;
 		int count = 0;
 		for(InventoryItemSlot[] e : bts) {
 			for(InventoryItemSlot f : e) {

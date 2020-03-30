@@ -38,9 +38,9 @@ public class BaseActor extends Group
 
     protected Vector2 velocityVec;
     private Vector2 accelerationVec;
-    private float acceleration;
-    private float maxSpeed;
-    private float deceleration;
+    protected float acceleration;
+    protected float maxSpeed;
+    protected float deceleration;
         
     private Polygon boundaryPolygon;
 

@@ -22,7 +22,10 @@ public class Player extends BaseActor{
 
 	private Inventory inv;
 	
-	private final float vacDistance = 50.0f;
+	private float vacDistance = 100.0f;
+	private float vacMaxSpeed = maxSpeed;
+	private float vacAccel = acceleration;
+	private float vacDecel = deceleration;
 	
 	private boolean invUpgrd = false;
 	private boolean spdUpgrd = false;
@@ -40,6 +43,12 @@ public class Player extends BaseActor{
         setDeceleration(45 * 4);
        
         inv = new Inventory(4,4, uiTable);
+	}
+	
+	public void updateVacStats() {
+		 vacMaxSpeed = maxSpeed;
+		 vacAccel = acceleration;
+		 vacDecel = deceleration;
 	}
 	
 	public void act(float dt) {
@@ -64,10 +73,11 @@ public class Player extends BaseActor{
         }
         
         if (Gdx.input.isKeyPressed(Keys.V)) {
-        	this.activateVacEffect();
+        	this.vacUpgrd = true;
         }
         if (Gdx.input.isKeyPressed(Keys.F)) {
-        	this.activateSpeedEffect();;
+        	this.activateSpeedEffect();
+        	this.setMaxSpeed(100);
         }
         if (Gdx.input.isKeyPressed(Keys.B)) {
         	this.activateBackEffect();;
@@ -90,13 +100,13 @@ public class Player extends BaseActor{
         	}
         }
         
-        
-        
         setAnimation(cur);
         
         setAnimationPaused( !isMoving() );
         
 		applyPhysics(dt);
+		
+		updateVacStats();
 		
 		alignCamera();
 		
@@ -215,4 +225,15 @@ public class Player extends BaseActor{
 		setAnimation(cur);
 	}
 	
+	public float getVacMaxSpeed() {
+		return vacMaxSpeed;
+	}
+
+	public float getVacAccel() {
+		return vacAccel;
+	}
+	
+	public float getVacDecel() {
+		return vacDecel;
+	}
 }

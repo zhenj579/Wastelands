@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -14,10 +15,12 @@ public class VacTrashActor extends BaseActor{
 	private String itemTexture;
 	private Animation<TextureRegion> anim;
 	private boolean vacAble = true;
+	private WastelandTrash wt;
 	
-	public VacTrashActor(float x, float y, Stage s, String name) {
+	public VacTrashActor(float x, float y, Stage s, String name, WastelandTrash wt) {
 		super(x, y, s);
 		this.name = name;
+		this.wt = wt;
 		
 		if(name.equals("trashedCan")) {
 			itemTexture = "cans.png";
@@ -36,24 +39,28 @@ public class VacTrashActor extends BaseActor{
 			itemName = "trashedBook";
 		}
 		
-		this.setMaxSpeed(50);
-		this.setAcceleration(380);
-		this.setDeceleration(380);
+		this.setWidth(16);
+		this.setHeight(16);
+		
+		this.setMaxSpeed(LevelScreen.wastelander.getVacMaxSpeed());
+		this.setAcceleration(LevelScreen.wastelander.getVacAccel());
+		this.setDeceleration(LevelScreen.wastelander.getVacDecel());
 		
 		initAnim();
 	}
 	
 	public void act(float dt) {
 		super.act(dt);
-		if(vacAble && LevelScreen.wastelander.isVacUpgrd() && this.isWithinDistance(LevelScreen.wastelander.getVacDistance(), LevelScreen.wastelander)) {
+		if(vacAble && LevelScreen.wastelander.isVacUpgrd() && LevelScreen.wastelander.isWithinDistance(LevelScreen.wastelander.getVacDistance(), this)) {
 			Vector2 playerToActorVector = new Vector2(LevelScreen.wastelander.getX() - this.getX(), LevelScreen.wastelander.getY() - this.getY());
 			this.accelerateAtAngle(playerToActorVector.angle());
 			this.applyPhysics(dt);
 		}
 		if(this.overlaps(LevelScreen.wastelander)) {
-			if(!LevelScreen.wastelander.getInventory().isFull()) {
+			if(!LevelScreen.wastelander.getInventory().isFull() && LevelScreen.wastelander.getInventory().hasSpace(itemName)) {
 				LevelScreen.wastelander.getInventory().addItem(new InventoryItem(itemName, itemTexture));
 				this.remove();
+				wt.destroy();
 			}
 		}
 		setAnimation(anim);
@@ -104,8 +111,7 @@ public class VacTrashActor extends BaseActor{
 			
 			anim = new Animation<TextureRegion>(0.0f, textureArray, Animation.PlayMode.LOOP_PINGPONG);
 		}
-		
-		
+			
 		setAnimation(anim);
 	}
 	
