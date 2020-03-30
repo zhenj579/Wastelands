@@ -131,13 +131,16 @@ public class Map extends Actor {
 				t.getValue().destroy();
 				return t.getValue();
 			}
+			else if(coordinates.x >= entry.x - 48 && coordinates.x <= entry.x + 48
+					&& coordinates.y >= entry.y - 48 && coordinates.y <= entry.y + 48 && player.hasVacEffect())
+			{
+				t.getValue().remove();
+				t.getValue().destroy();
+				mapObjects.remove(entry);
+				return t.getValue();
+			}
 		}
 		return null;
-	}
-	
-	public boolean isEmpty()
-	{
-		return mapObjects.isEmpty();
 	}
 	
 	
@@ -173,7 +176,11 @@ public class Map extends Actor {
 		batch.begin();
 		
 	}
+
 	
-	
+	public boolean isEmpty()
+	{
+		return mapObjects.isEmpty();
+	}
 
 }

@@ -3,7 +3,6 @@ package com.mygdx.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -56,7 +55,7 @@ public class TitleScreen extends BaseScreen {
 		mainTable.row();
 		mainTable.add(text6);
 		
-		super.mainStage.addActor(mainTable);
+		mainStage.addActor(mainTable);
 	}
 
 	@Override

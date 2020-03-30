@@ -32,7 +32,7 @@ public class EndScreen extends BaseScreen {
 		mainTable.row();
 		mainTable.add(text1);
 		
-		super.mainStage.addActor(mainTable);
+		mainStage.addActor(mainTable);
 	}
 
 	@Override
