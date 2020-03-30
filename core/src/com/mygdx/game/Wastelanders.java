@@ -6,7 +6,9 @@ public class Wastelanders extends BaseGame {
     {        
         super.create();
 
-        setActiveScreen( new LevelScreen() );
+//        setActiveScreen( new LevelScreen() );
+        
+        setActiveScreen(new TitleScreen(this) );
     }
 	
 }
