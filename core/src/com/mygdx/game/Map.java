@@ -135,6 +135,11 @@ public class Map extends Actor {
 		return null;
 	}
 	
+	public boolean isEmpty()
+	{
+		return mapObjects.isEmpty();
+	}
+	
 	
 	 public void act(float dt)
 	 {

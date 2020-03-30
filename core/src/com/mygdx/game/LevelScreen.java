@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
@@ -14,6 +15,12 @@ public class LevelScreen extends BaseScreen
     private Npc merchant;
 	public static Player wastelander;	
 	private Sound backgroundMusic;
+	private Game game;
+	
+	public LevelScreen(Game game)
+	{
+		this.game = game;
+	}
 	
     public void initialize() 
     {   
@@ -42,6 +49,11 @@ public class LevelScreen extends BaseScreen
     
     public void update(float dt)
     {
+    	if(map.isEmpty())
+    	{
+    		game.setScreen(new EndScreen());
+    		super.dispose();
+    	}
     	if(!wastelander.isWithinDistance(20, merchant) && merchant.getShop().isVisible()) {
     		merchant.getShop().setVisible(false);
     	}
