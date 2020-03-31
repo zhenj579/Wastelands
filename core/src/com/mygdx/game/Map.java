@@ -85,6 +85,10 @@ public class Map extends Actor {
 		stage.addActor(this);
 	}
 	
+	public HashMap<Vector2, WastelandTrash> getMapObjs() {
+		return mapObjects;
+	}
+	
 	public WastelandTrash getTrashAt(final Vector2 coordinates, final Player player)
 	{
 		for(final Entry<Vector2, WastelandTrash> t : mapObjects.entrySet())

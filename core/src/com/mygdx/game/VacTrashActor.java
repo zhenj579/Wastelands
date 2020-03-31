@@ -20,7 +20,8 @@ public class VacTrashActor extends BaseActor{
 	public VacTrashActor(float x, float y, Stage s, String name, WastelandTrash wt) {
 		super(x, y, s);
 		this.name = name;
-		this.wt = wt;
+		if(wt != null)
+			this.wt = wt;	
 		
 		if(name.equals("trashedCan")) {
 			itemTexture = "cans.png";
@@ -30,7 +31,7 @@ public class VacTrashActor extends BaseActor{
 			itemTexture = "bottles.png";
 			itemName = "trashedBottle";
 		}
-		if(name.equals("brokenChair")) {
+		if(name.equals("brokenChair") || name.equals("trashedWood")) {
 			itemTexture = "wood.png";
 			itemName = "trashedWood";
 		}
@@ -47,7 +48,7 @@ public class VacTrashActor extends BaseActor{
 		this.setDeceleration(LevelScreen.wastelander.getVacDecel());
 		
 		initAnim();
-	}
+	}	
 	
 	public void act(float dt) {
 		super.act(dt);
@@ -56,7 +57,7 @@ public class VacTrashActor extends BaseActor{
 			this.accelerateAtAngle(playerToActorVector.angle());
 			this.applyPhysics(dt);
 		}
-		if(this.overlaps(LevelScreen.wastelander)) {
+		if(this.overlaps(LevelScreen.wastelander) && LevelScreen.wastelander.isVacUpgrd()) {
 			if(!LevelScreen.wastelander.getInventory().isFull() && LevelScreen.wastelander.getInventory().hasSpace(itemName)) {
 				LevelScreen.wastelander.getInventory().addItem(new InventoryItem(itemName, itemTexture));
 				this.remove();
@@ -89,7 +90,7 @@ public class VacTrashActor extends BaseActor{
 			
 			anim = new Animation<TextureRegion>(0.0f, textureArray, Animation.PlayMode.LOOP_PINGPONG);
 		}
-		if(name.equals("brokenChair")) {
+		if(name.equals("brokenChair") || name.equals("trashedWood")) {
 			Texture sprite = new Texture("wood_world.png");
 			TextureRegion[][] tr = TextureRegion.split(sprite, 16, 16);
 			

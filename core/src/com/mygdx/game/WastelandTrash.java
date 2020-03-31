@@ -31,7 +31,6 @@ public class WastelandTrash extends BaseActor{
 		this.ref = ref;
 		stage.addActor(this);	
 		i = index;
-
 	}
 	
 	@Override
@@ -82,7 +81,11 @@ public class WastelandTrash extends BaseActor{
 	@Override
 	public boolean remove() {
 		super.remove();
-		ref.remove((int)getX() / 16, (int)getY() / 16);
+		try {
+			ref.remove((int)getX() / 16, (int)getY() / 16);
+		} catch(Exception e) {
+			
+		}
 		return false;
 	}
 	

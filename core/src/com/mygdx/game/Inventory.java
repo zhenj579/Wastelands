@@ -155,23 +155,24 @@ public class Inventory extends Actor{
 		}
 	}
 	
-	public void moveItem(InventoryItemSlot source, InventoryItemSlot destination) {
+	public boolean moveItem(InventoryItemSlot source, InventoryItemSlot destination) {
 		if(source == null || destination == null || (source == destination)) {
-			return;
+			return false;
 		}
 		if(!destination.isEmpty()) {
 			if(destination.getItem().equals(source.getItem()) && allowStacking) {
 				destination.increaseQuantityBy(source.getQuanity());
 				source.clearSlot();
-				return;
+				return true;
 			}
 			InventoryItemSlot temp = destination.getItemSlotCopy();
 			destination.setItem(source.getItem(), source.getQuanity());
 			source.setItem(temp.getItem(), temp.getQuanity());
-			return;
+			return true;
 		}
 		destination.setItem(source.getItem(), source.getQuanity());
 		source.clearSlot();
+		return true;
 	}
 	
 	public boolean hasSpace(String name) {
@@ -199,6 +200,10 @@ public class Inventory extends Actor{
 	
 	public InventoryItemSlot getCurSel() {
 		return curSelected;
+	}
+	
+	public void deleteCurSelected() {
+		curSelected.clearSlot();
 	}
 	
 	public Table getInvTable() {
