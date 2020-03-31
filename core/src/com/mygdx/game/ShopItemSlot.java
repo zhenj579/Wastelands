@@ -12,6 +12,8 @@ public class ShopItemSlot extends InventoryItemSlot {
 	private boolean isBack = false;
 	private boolean isSpd = false;
 	private boolean isVac = false;
+	
+	private String effect;
 
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
@@ -27,6 +29,7 @@ public class ShopItemSlot extends InventoryItemSlot {
 	}
 	
 	public void setBack(boolean isBck) {
+		effect = "back";
 		this.isBack = isBck;
 	}
 	
@@ -37,6 +40,7 @@ public class ShopItemSlot extends InventoryItemSlot {
 	
 	
 	public void setSpd(boolean isSpd) {
+		effect = "speed";
 		this.isSpd = isSpd;
 	}
 	
@@ -47,9 +51,22 @@ public class ShopItemSlot extends InventoryItemSlot {
 	
 	
 	public void setVac(boolean isVac) {
+		effect = "vac";
 		this.isVac = isVac;
 	}
 	
+	public boolean playerHasEffect() {
+		if(isBack && !isSpd && !isVac) {
+			return LevelScreen.wastelander.isInvUpgrd();
+		}
+		if(!isBack && isSpd && !isVac) {
+			return LevelScreen.wastelander.isSpdUpgrd();
+		}
+		if(!isBack && !isSpd && isVac) {
+			return LevelScreen.wastelander.hasVacEffect();
+		}
+		return false;
+	}
 	
 	public ShopItemSlot() {
 		super();

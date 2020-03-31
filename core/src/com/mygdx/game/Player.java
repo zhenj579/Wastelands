@@ -16,6 +16,8 @@ public class Player extends BaseActor{
 	private Animation<TextureRegion> cur = down;
 	
 	private final float frameDuration = 0.25f;
+
+
 	private float uidt = 0.0f;
 
 	private Table uiTable;
@@ -112,6 +114,22 @@ public class Player extends BaseActor{
 		
 		boundToWorld();
 
+	}
+	
+	public boolean isInvUpgrd() {
+		return invUpgrd;
+	}
+
+	public void setInvUpgrd(boolean invUpgrd) {
+		this.invUpgrd = invUpgrd;
+	}
+
+	public boolean isSpdUpgrd() {
+		return spdUpgrd;
+	}
+
+	public void setSpdUpgrd(boolean spdUpgrd) {
+		this.spdUpgrd = spdUpgrd;
 	}
 	
 	public boolean isVacUpgrd() {
