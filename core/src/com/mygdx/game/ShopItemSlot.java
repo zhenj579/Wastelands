@@ -13,15 +13,25 @@ public class ShopItemSlot extends InventoryItemSlot {
 	private boolean isSpd = false;
 	private boolean isVac = false;
 	
-	private String effect;
-
+	
+	
+	public ShopItemSlot() {
+		super();
+		super.setShopSlot(true);
+	}
+	
+	
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
 		super.draw(batch, parentAlpha);
-		if(item != null && !hidden) {
-			batch.draw(item.itemTextureRegion, getX() + getWidth() / 2 - 16, getY() + getHeight() / 2 - 16);
+		if(item != null && !hidden && bought) {
+			//batch.draw(item.itemTextureRegion, getX() + getWidth() / 2 - 16, getY() + getHeight() / 2 - 16);
 		}
 		super.validate();
+	}
+	
+	public boolean bought() {
+		return bought;
 	}
 	
 	public boolean isBack() {
@@ -29,7 +39,6 @@ public class ShopItemSlot extends InventoryItemSlot {
 	}
 	
 	public void setBack(boolean isBck) {
-		effect = "back";
 		this.isBack = isBck;
 	}
 	
@@ -40,7 +49,6 @@ public class ShopItemSlot extends InventoryItemSlot {
 	
 	
 	public void setSpd(boolean isSpd) {
-		effect = "speed";
 		this.isSpd = isSpd;
 	}
 	
@@ -51,7 +59,6 @@ public class ShopItemSlot extends InventoryItemSlot {
 	
 	
 	public void setVac(boolean isVac) {
-		effect = "vac";
 		this.isVac = isVac;
 	}
 	
@@ -68,9 +75,8 @@ public class ShopItemSlot extends InventoryItemSlot {
 		return false;
 	}
 	
-	public ShopItemSlot() {
-		super();
-		super.setShopSlot(true);
+	public void buyItem() {
+		bought = true;
 	}
 	
 	public void setPrice(int can, int bottle, int paper, int wood) {

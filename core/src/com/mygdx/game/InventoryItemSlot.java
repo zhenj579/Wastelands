@@ -15,6 +15,7 @@ public class InventoryItemSlot extends Button{
 	private static final int labelOffSetY = -30;
 	
 	private boolean isShopSlot = false;
+	protected boolean bought = false;
 	
 	public InventoryItemSlot() {
 		super(BaseGame.skin);
@@ -37,7 +38,7 @@ public class InventoryItemSlot extends Button{
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
 		super.draw(batch, parentAlpha);
-		if(item != null && !hidden) {
+		if(item != null && !hidden && !bought) {
 			batch.draw(item.itemTextureRegion, getX() + getWidth()/2 - 16, getY() + getHeight()/2 - 16);
 			if(quantity > 0 && !isShopSlot) {
 				quantityLabel.setX(getX() + getWidth()/2 + labelOffSetX);
