@@ -42,7 +42,6 @@ public class LevelScreen extends BaseScreen
 
     	uiTable.setVisible(true);	
     	
-    	
     	backgroundMusic = Gdx.audio.newSound(Gdx.files.internal("backgroundmusic.mp3"));
     	backgroundMusic.loop(0.1f);
     }
