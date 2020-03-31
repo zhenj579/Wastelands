@@ -24,8 +24,8 @@ public class ShopItemSlot extends InventoryItemSlot {
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
 		super.draw(batch, parentAlpha);
-		if(item != null && !hidden && bought) {
-			//batch.draw(item.itemTextureRegion, getX() + getWidth() / 2 - 16, getY() + getHeight() / 2 - 16);
+		if(item != null && !hidden && !bought) {
+			batch.draw(item.itemTextureRegion, getX() + getWidth() / 2 - 16, getY() + getHeight() / 2 - 16);
 		}
 		super.validate();
 	}

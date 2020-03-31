@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -10,6 +11,7 @@ public class ShopItemListener extends ClickListener {
 	
 	private ShopItemSlot ref;
 	private Label label = new Label("Test", BaseGame.labelStyle);
+	private boolean clicked = false;
 	
 	public ShopItemListener(ShopItemSlot slot) {
 		this.ref = slot;
@@ -26,6 +28,7 @@ public class ShopItemListener extends ClickListener {
 			ref.buyItem();
 			LevelScreen.wastelander.getInventory().deduct(ref.getCanPrice(), ref.getBottlePrice(), ref.getPaperPrice(), ref.getWoodPrice());
 		}
+		clicked = true;
 	}
 	
 	@Override
@@ -41,7 +44,11 @@ public class ShopItemListener extends ClickListener {
 	
 	@Override
 	public void exit(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-		label.setVisible(false);
+		if(!clicked) {
+			label.setVisible(false);
+		} else {
+			clicked = false;
+		}
 	}
 	
 }

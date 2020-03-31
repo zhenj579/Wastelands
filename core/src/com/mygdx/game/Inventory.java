@@ -288,8 +288,6 @@ public class Inventory extends Actor{
 					}
 				}
 				f.updateLabel();
-				if(f.getItem() != null)
-					Gdx.app.log("Deduct", f.getItem().getName() + " " + f.getQuanity());
 			}
 		}
 	}
