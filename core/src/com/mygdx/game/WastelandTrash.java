@@ -39,7 +39,6 @@ public class WastelandTrash extends BaseActor{
 		super.act(dt);
 		if(vacAble && LevelScreen.wastelander.isVacUpgrd() && LevelScreen.wastelander.isWithinDistance(LevelScreen.wastelander.getVacDistance(), this)) {
 			new VacTrashActor(this.getX(), this.getY(), BaseScreen.mainStage, name, this);
-			this.destroy();
 			this.remove();
 		}
 	}
